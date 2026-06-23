@@ -38,6 +38,12 @@ button {
   padding: 28px 0 18px;
 }
 
+@media (min-width: 761px) {
+  .app-shell {
+    zoom: 0.75;
+  }
+}
+
 .app-header {
   display: flex;
   align-items: center;
@@ -2414,9 +2420,9 @@ footer {
   }
 
   .root-badge strong {
-    width: 48px;
-    height: 29px;
-    font-size: 1.48rem;
+    width: 42px;
+    height: 25px;
+    font-size: 1.28rem;
   }
 
   .root-badge > span {
@@ -2460,6 +2466,11 @@ footer {
 
   .root-option[data-root-value="random"] {
     grid-column: span 3;
+  }
+
+  footer {
+    margin-top: -20px;
+    font-size: 0.69rem;
   }
 
   .kitchen-stage {
