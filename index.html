@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Chord Quality Kitchen</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css?v=20260623-mobile-seafood-icon2">
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="app-header">
+        <div>
+          <p class="mode-label">Listen &amp; Cook</p>
+          <h1>Chord Quality Kitchen</h1>
+        </div>
+        <div class="root-selector">
+          <button class="root-badge" id="rootBadge" type="button" aria-haspopup="menu" aria-expanded="false">
+            <span>Root</span>
+            <strong id="rootNote" aria-live="polite">C</strong>
+            <em id="rootLockState">Random</em>
+          </button>
+          <div class="root-menu" id="rootMenu" role="menu" aria-label="Choose root" hidden></div>
+        </div>
+      </header>
+
+      <section class="workbench" aria-label="Chord cooking workspace">
+        <div class="status-panel">
+          <p id="audioStatus" class="audio-status">Piano samples loading...</p>
+        </div>
+
+        <aside class="recipe-board" aria-label="Soup recipe board" data-collapsed="true">
+          <button id="recipeBoardToggle" class="recipe-board-toggle" type="button" aria-expanded="true" aria-controls="recipeBoard">
+            <span>Soup Recipe Board</span>
+            <em>Hide</em>
+          </button>
+          <div class="recipe-board-list" id="recipeBoard"></div>
+        </aside>
+        <p class="ladle-hint">Click the ladle to try the soup!</p>
+
+        <div class="feedback" id="feedback" aria-live="polite"></div>
+
+        <div class="kitchen-stage">
+          <div class="sparkles" id="sparkles" aria-hidden="true">
+            <span></span><span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span><span></span>
+          </div>
+
+          <div class="pot-wrap" id="potWrap" aria-label="Cooking pot with selected ingredients">
+            <div class="steam" aria-hidden="true">
+              <span></span><span></span><span></span>
+            </div>
+            <div class="pot">
+              <div class="pot-rim"></div>
+              <div class="pot-body">
+                <div class="pot-face">
+                  <span class="eye"></span>
+                  <span class="smile"></span>
+                  <span class="eye"></span>
+                </div>
+                <div class="bubbles" aria-hidden="true">
+                  <span></span><span></span><span></span>
+                </div>
+                <div class="noodle-layer" aria-hidden="true"></div>
+                <div class="pot-ingredients" id="potIngredients"></div>
+              </div>
+              <div class="handle handle-left"></div>
+              <div class="handle handle-right"></div>
+              <button class="ladle" id="ladleButton" type="button" aria-label="Try my soup"></button>
+            </div>
+          </div>
+        </div>
+
+        <div class="controls" aria-label="Playback and answer controls">
+          <button id="playButton" class="primary-button" type="button">Hear Order</button>
+          <button id="submitButton" class="secondary-button serve-button" type="button"><span>Serve</span></button>
+          <button id="nextButton" class="secondary-button" type="button">Next Order</button>
+        </div>
+
+        <div class="recipe" id="recipe" hidden></div>
+      </section>
+
+      <section class="ingredient-section" aria-label="Ingredient choices">
+        <div class="ingredient-heading">
+          <h2>Ingredients</h2>
+          <button id="resetButton" class="utility-button" type="button">Reset Ingredients</button>
+        </div>
+        <div class="ingredient-grid" id="ingredientGrid"></div>
+      </section>
+    </main>
+
+    <footer>Created by Jane Hong (UdonBytes)</footer>
+
+    <script src="script.js?v=20260623-mobile-seafood-icon2"></script>
+  </body>
+</html>

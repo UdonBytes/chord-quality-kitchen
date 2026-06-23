@@ -1,0 +1,2869 @@
+:root {
+  --ink: #403744;
+  --muted: #756b7a;
+  --cream: #fff8ed;
+  --peach: #ffd8c7;
+  --pink: #ffc5d6;
+  --mint: #bdebd9;
+  --sky: #bfe4ff;
+  --butter: #ffe79a;
+  --lavender: #d9ccff;
+  --berry: #9b4f78;
+  --leaf: #357b67;
+  --shadow: 0 18px 45px rgba(96, 72, 64, 0.16);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--ink);
+  font-family: "Trebuchet MS", "Segoe UI", Arial, sans-serif;
+  background:
+    radial-gradient(circle at 16% 12%, rgba(255, 231, 154, 0.55), transparent 24rem),
+    radial-gradient(circle at 86% 10%, rgba(191, 228, 255, 0.55), transparent 22rem),
+    linear-gradient(180deg, #fff6ea 0%, #f7fff8 100%);
+}
+
+button {
+  font: inherit;
+}
+
+.app-shell {
+  width: min(1120px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 28px 0 18px;
+}
+
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 18px;
+}
+
+.mode-label {
+  margin: 0 0 4px;
+  color: var(--leaf);
+  font-size: 0.9rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+h1,
+h2,
+p {
+  margin-top: 0;
+}
+
+h1 {
+  margin-bottom: 0;
+  font-family: "Fredoka", "Trebuchet MS", "Segoe UI Rounded", "Arial Rounded MT Bold", sans-serif;
+  font-weight: 700;
+  font-size: clamp(2rem, 5vw, 4.4rem);
+  line-height: 0.96;
+  letter-spacing: 0;
+}
+
+h2 {
+  margin-bottom: 14px;
+  font-size: 1.25rem;
+}
+
+.root-selector {
+  position: relative;
+}
+
+.root-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  place-items: center;
+  width: 96px;
+  height: 96px;
+  min-width: 96px;
+  min-height: 96px;
+  padding: 12px;
+  border: 3px solid #fff;
+  border-radius: 24px;
+  background: var(--butter);
+  box-shadow: var(--shadow);
+  color: var(--ink);
+  cursor: pointer;
+  transition: transform 0.16s ease, box-shadow 0.16s ease;
+}
+
+.root-badge:hover,
+.root-badge:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 20px 48px rgba(96, 72, 64, 0.2);
+}
+
+.root-badge:focus-visible {
+  outline: 3px solid rgba(255, 174, 78, 0.55);
+  outline-offset: 4px;
+}
+
+.root-badge > span {
+  color: #80632e;
+  font-size: 0.78rem;
+  font-weight: 800;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.root-badge strong {
+  display: inline-flex;
+  align-items: baseline;
+  justify-content: center;
+  width: 64px;
+  height: 40px;
+  font-size: 2.15rem;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.root-note-content {
+  display: inline-flex;
+  align-items: baseline;
+  justify-content: center;
+  line-height: 1;
+  transform: translateY(3px);
+}
+
+.root-note-content[data-has-accidental="true"] {
+  transform: translate(-0.02em, 3px);
+}
+
+.root-letter {
+  display: inline-block;
+  line-height: 1;
+}
+
+.root-badge strong .flat-symbol {
+  display: inline-block;
+  margin-left: 0.03em;
+  color: inherit;
+  font-size: 0.66em;
+  line-height: 1;
+  transform: translateY(-0.1em);
+}
+
+.root-badge em {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 17px;
+  color: rgba(64, 55, 68, 0.7);
+  font-size: 0.66rem;
+  font-style: normal;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.root-menu {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  z-index: 30;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(54px, 1fr));
+  gap: 7px;
+  width: 236px;
+  padding: 12px;
+  border: 3px solid #fff;
+  border-radius: 22px;
+  background: rgba(255, 248, 237, 0.98);
+  box-shadow: 0 18px 42px rgba(96, 72, 64, 0.18);
+  transform-origin: top right;
+  animation: root-menu-pop 0.18s ease both;
+}
+
+.root-menu[hidden] {
+  display: none;
+}
+
+.root-option {
+  min-height: 38px;
+  border: 2px solid rgba(128, 99, 46, 0.16);
+  border-radius: 13px;
+  background: #fff4cd;
+  color: var(--ink);
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 3px 0 rgba(128, 99, 46, 0.12);
+  transition: transform 0.14s ease, background 0.14s ease, border-color 0.14s ease;
+}
+
+.root-option:hover,
+.root-option:focus-visible {
+  transform: translateY(-1px);
+  background: #ffe79a;
+}
+
+.root-option[aria-checked="true"] {
+  border-color: rgba(64, 55, 68, 0.46);
+  background: #ffd874;
+}
+
+.root-option[data-root-value="random"] {
+  grid-column: span 3;
+  background: #fff8ed;
+}
+
+@keyframes root-menu-pop {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.96);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes mobile-root-menu-pop {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.96);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.workbench,
+.ingredient-section {
+  border: 3px solid rgba(255, 255, 255, 0.85);
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.62);
+  box-shadow: var(--shadow);
+}
+
+.workbench {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  justify-items: center;
+  padding: clamp(12px, 3vw, 24px) clamp(18px, 4vw, 34px) clamp(18px, 4vw, 34px);
+}
+
+.status-panel {
+  position: absolute;
+  top: auto;
+  bottom: 10px;
+  left: 50%;
+  z-index: 24;
+  width: min(820px, 100%);
+  pointer-events: none;
+  text-align: center;
+  transform: translateX(-50%);
+}
+
+.status-panel p {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+#roundPrompt {
+  font-family: "Fredoka", "Trebuchet MS", "Segoe UI Rounded", "Arial Rounded MT Bold", sans-serif;
+  font-size: clamp(0.94rem, 1.35vw, 1.08rem);
+  font-weight: 600;
+  line-height: 1.18;
+  white-space: nowrap;
+}
+
+.audio-status {
+  display: inline-block;
+  max-width: min(640px, calc(100% - 28px));
+  min-height: 0;
+  padding: 2px 8px;
+  border-radius: 0;
+  background: transparent;
+  color: var(--muted);
+  font-family: "Fredoka", "Trebuchet MS", "Segoe UI Rounded", "Arial Rounded MT Bold", sans-serif;
+  font-size: 0.92rem;
+  font-weight: 600;
+  line-height: 1.2;
+  box-shadow: none;
+}
+
+.audio-status:empty {
+  display: none;
+}
+
+.kitchen-stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: min(940px, 100%);
+  min-height: 326px;
+  padding: 0;
+}
+
+.recipe-board {
+  position: relative;
+  z-index: 3;
+  width: min(940px, 100%);
+  margin: 4px 0 5px;
+  overflow: visible;
+  padding: 13px 16px 15px;
+  border: 4px solid #b98658;
+  border-radius: 16px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.1), transparent 36%),
+    #5f826e;
+  color: #fffaf0;
+  box-shadow: 0 8px 0 rgba(103, 69, 48, 0.14);
+  text-align: left;
+}
+
+.recipe-board::before {
+  content: "";
+  position: absolute;
+  top: -17px;
+  left: 50%;
+  width: 76px;
+  height: 20px;
+  border: 3px solid rgba(185, 134, 88, 0.72);
+  border-bottom: 0;
+  border-radius: 999px 999px 0 0;
+  background: transparent;
+  transform: translateX(-50%);
+}
+
+.recipe-board::after {
+  content: "";
+  position: absolute;
+  top: -5px;
+  left: 50%;
+  width: 98px;
+  height: 10px;
+  border-radius: 999px;
+  background: #c99b6d;
+  transform: translateX(-50%);
+}
+
+.recipe-board-toggle {
+  display: block;
+  width: 100%;
+  margin: 0 0 6px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #ffe79a;
+  font-size: 0.7rem;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-align: center;
+  text-transform: uppercase;
+  cursor: default;
+}
+
+.recipe-board-toggle em {
+  display: none;
+  font-style: normal;
+}
+
+.recipe-board-list {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 7px;
+}
+
+.recipe-board-item {
+  position: relative;
+  display: grid;
+  align-content: start;
+  gap: 5px;
+  min-width: 0;
+  padding: 7px 8px 8px;
+  border: 1px dashed rgba(255, 250, 240, 0.28);
+  border-radius: 10px;
+  background: rgba(255, 250, 240, 0.08);
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  overflow: hidden;
+  text-align: left;
+  transition: opacity 160ms ease, filter 160ms ease, box-shadow 160ms ease, background 160ms ease;
+}
+
+.recipe-board-item:hover {
+  background: rgba(255, 250, 240, 0.18);
+}
+
+.recipe-board-item:focus-visible {
+  outline: 3px solid rgba(255, 231, 154, 0.88);
+  outline-offset: 2px;
+}
+
+.recipe-board-item[data-possible="true"] {
+  background: rgba(255, 250, 240, 0.15);
+  box-shadow: inset 0 0 0 1px rgba(255, 231, 154, 0.18);
+}
+
+.recipe-board-item[data-possible="false"] {
+  opacity: 0.36;
+  filter: grayscale(0.35);
+}
+
+.recipe-board-item[data-sold-out="true"] {
+  opacity: 1;
+  filter: none;
+}
+
+.recipe-board-item[data-sold-out="true"] > strong,
+.recipe-board-item[data-sold-out="true"] .recipe-board-ingredients {
+  opacity: 0.28;
+  filter: grayscale(0.45);
+}
+
+.recipe-board-item[data-sold-out="true"]::after,
+.recipe-board-item[data-sold-out-exit="true"]::after {
+  content: "";
+  position: absolute;
+  z-index: 3;
+  inset: 6px 4px;
+  background: url("assets/sold-out.png") center / contain no-repeat;
+  transform-origin: 50% 0;
+}
+
+.recipe-board-item[data-sold-out-animate="true"]::after {
+  animation: sold-out-drop 720ms cubic-bezier(0.2, 0.9, 0.25, 1.2) both;
+  transform-origin: 50% 0;
+}
+
+.recipe-board-item[data-sold-out-exit="true"]::after {
+  animation: sold-out-pull-up 460ms ease-in both;
+}
+
+.recipe-board-item strong {
+  color: #ffe79a;
+  font-size: 0.68rem;
+  line-height: 1.12;
+}
+
+.recipe-board-ingredients {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 5px;
+}
+
+.recipe-ingredient {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  min-width: 0;
+  padding: 2px 5px;
+  border-radius: 999px;
+  background: rgba(255, 250, 240, 0.12);
+  color: rgba(255, 250, 240, 0.88);
+  font-size: 0.55rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.recipe-ingredient::before {
+  content: "";
+  flex: 0 0 auto;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.64;
+}
+
+.recipe-ingredient[data-selected="true"] {
+  background: rgba(255, 231, 154, 0.92);
+  color: #4c4231;
+  box-shadow: 0 0 12px rgba(255, 231, 154, 0.9);
+}
+
+.pot-wrap {
+  position: relative;
+  z-index: 2;
+  width: min(640px, 100%);
+  aspect-ratio: 2.16;
+}
+
+.steam {
+  position: absolute;
+  inset: 0 20% auto;
+  height: 96px;
+}
+
+.steam span {
+  position: absolute;
+  bottom: 0;
+  width: 28px;
+  height: 70px;
+  border-radius: 999px;
+  border: 5px solid rgba(147, 188, 190, 0.35);
+  border-bottom: 0;
+  animation: drift 2.7s ease-in-out infinite;
+}
+
+.steam span:nth-child(1) {
+  left: 20%;
+}
+
+.steam span:nth-child(2) {
+  left: 44%;
+  animation-delay: 0.5s;
+}
+
+.steam span:nth-child(3) {
+  left: 67%;
+  animation-delay: 1s;
+}
+
+.pot {
+  position: absolute;
+  inset: 64px 0 0;
+}
+
+.pot-rim {
+  position: absolute;
+  z-index: 4;
+  left: 5%;
+  top: 0;
+  width: 90%;
+  height: 74px;
+  border: 6px solid #65566d;
+  border-radius: 999px;
+  background:
+    linear-gradient(180deg, #fff9df 0 42%, #f4ce91 43% 100%);
+  box-shadow: inset 0 -8px 0 rgba(101, 86, 109, 0.08);
+}
+
+.pot-body {
+  position: absolute;
+  z-index: 3;
+  left: 8%;
+  top: 35px;
+  width: 84%;
+  height: 182px;
+  overflow: hidden;
+  border: 6px solid #65566d;
+  border-radius: 38px 38px 92px 92px;
+  background:
+    radial-gradient(circle at 50% -28%, rgba(255, 255, 255, 0.4) 0 30%, transparent 31%),
+    linear-gradient(180deg, #a8ddf4 0%, #86c6e6 100%);
+  box-shadow: inset 0 -16px 0 rgba(77, 126, 157, 0.13);
+  transition: box-shadow 420ms ease;
+}
+
+.pot-wrap[data-has-base="true"] .pot-body {
+  box-shadow:
+    inset 0 -16px 0 rgba(199, 153, 64, 0.1),
+    0 0 16px rgba(255, 226, 143, 0.2);
+}
+
+.pot-body::before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  inset: 34px 25px auto;
+  height: 17px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.34);
+}
+
+.pot-body::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  background:
+    radial-gradient(circle at 50% -28%, rgba(255, 255, 255, 0.34) 0 30%, transparent 31%),
+    linear-gradient(180deg, #ffeaa8 0%, #f8d883 100%);
+  opacity: 0;
+  transform: scaleY(0);
+  transform-origin: bottom center;
+  transition:
+    opacity 420ms ease-out,
+    transform 620ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.pot-wrap[data-has-base="true"] .pot-body::after {
+  opacity: 1;
+  transform: scaleY(1);
+}
+
+.handle {
+  position: absolute;
+  top: 92px;
+  z-index: 2;
+  width: 58px;
+  height: 48px;
+  border: 6px solid #65566d;
+  border-radius: 999px;
+  background: #d9dde3;
+}
+
+.handle-left {
+  left: 18px;
+  box-shadow: inset 7px 0 0 rgba(255, 255, 255, 0.38);
+}
+
+.handle-right {
+  right: 18px;
+  box-shadow: inset -7px 0 0 rgba(93, 92, 102, 0.14);
+}
+
+.ladle {
+  position: absolute;
+  z-index: 8;
+  right: 14px;
+  top: -61px;
+  width: 218px;
+  height: 220px;
+  padding: 0;
+  border: 0;
+  background: url("assets/ladle.png") center / contain no-repeat;
+  cursor: pointer;
+  filter: drop-shadow(0 5px 4px rgba(91, 59, 69, 0.18));
+  transform: rotate(8deg);
+  transform-origin: 64% 28%;
+  transition: filter 140ms ease, transform 140ms ease;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.ladle:hover {
+  filter:
+    drop-shadow(0 5px 4px rgba(91, 59, 69, 0.18))
+    drop-shadow(0 0 9px rgba(247, 178, 103, 0.6));
+  transform: translateY(-2px) rotate(8deg);
+}
+
+.ladle:focus-visible {
+  outline: 4px solid rgba(247, 178, 103, 0.55);
+  outline-offset: 3px;
+  border-radius: 24px;
+}
+
+.ladle:active {
+  transform: translateY(3px) rotate(8deg);
+}
+
+.ladle::after {
+  display: none;
+}
+
+.pot-face {
+  position: absolute;
+  z-index: 4;
+  left: 50%;
+  bottom: 39px;
+  display: flex;
+  align-items: center;
+  gap: 21px;
+  transform: translateX(-50%);
+}
+
+.eye {
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: var(--ink);
+}
+
+.smile {
+  width: 32px;
+  height: 18px;
+  border-bottom: 5px solid var(--ink);
+  border-radius: 0 0 999px 999px;
+}
+
+.bubbles span,
+.pot-ingredients span {
+  position: absolute;
+  border-radius: 999px;
+}
+
+.bubbles {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+}
+
+.pot-ingredients {
+  position: absolute;
+  z-index: 3;
+  left: 9%;
+  top: 8px;
+  width: 82%;
+  height: 106px;
+  pointer-events: none;
+}
+
+.bubbles span {
+  width: 12px;
+  height: 12px;
+  background: rgba(255, 255, 255, 0.72);
+  animation: bubble 1.8s ease-in-out infinite;
+}
+
+.bubbles span:nth-child(1) {
+  left: 28%;
+  top: 61px;
+}
+
+.bubbles span:nth-child(2) {
+  left: 50%;
+  top: 51px;
+  animation-delay: 0.35s;
+}
+
+.bubbles span:nth-child(3) {
+  left: 68%;
+  top: 67px;
+  animation-delay: 0.7s;
+}
+
+.noodle-layer {
+  position: absolute;
+  z-index: 3;
+  left: 15%;
+  top: 86px;
+  width: 70%;
+  height: 76px;
+  pointer-events: none;
+  opacity: 0;
+  background: center bottom / 100% 100% no-repeat;
+  transform: translateY(8px);
+  transition: opacity 320ms ease-out, transform 340ms ease-out;
+}
+
+.noodle-layer.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.noodle-layer[data-noodle="springy"] {
+  background-image: url("assets/noodle-arc-springy.png?v=solid");
+}
+
+.noodle-layer[data-noodle="soft"] {
+  background-image: url("assets/noodle-arc-soft.png?v=toasted");
+}
+
+.pot-wrap.stirring .noodle-layer {
+  animation: noodle-swirl 820ms ease-in-out both;
+}
+
+.pot-ingredients span {
+  display: block;
+}
+
+.pot-ingredient-chip {
+  position: absolute;
+  width: var(--pot-food-size);
+  height: var(--pot-food-size);
+  filter: drop-shadow(0 5px 4px rgba(91, 59, 69, 0.18));
+  transform: translate(-50%, -50%) rotate(var(--tilt));
+  opacity: 1;
+}
+
+.pot-ingredient-chip.entering {
+  animation: ingredient-pop 340ms ease both;
+}
+
+.pot-ingredient-chip.exiting {
+  pointer-events: none;
+  animation: ingredient-exit 280ms ease-in both;
+}
+
+.pot-wrap.stirring .ladle {
+  animation: ladle-stir 820ms ease-in-out both;
+}
+
+.pot-wrap.empty-stir .ladle {
+  animation: ladle-empty-wiggle 460ms ease-in-out both;
+}
+
+.pot-wrap.stirring .pot-ingredient-chip:not(.exiting):not([data-food="seafood-bite"]):not([data-food="tofu"]):not([data-food="spicy-peppers"]):not([data-food="cheese"]) {
+  animation: ingredient-swirl 820ms ease-in-out both;
+}
+
+.pot-wrap.stirring .pot-ingredient-chip[data-food="steak-bite"]:not(.exiting):not([data-food="seafood-bite"]):not([data-food="tofu"]):not([data-food="spicy-peppers"]):not([data-food="cheese"]) {
+  animation: steak-gentle-wiggle 960ms ease-in-out both;
+}
+
+.pot-food-art {
+  position: absolute;
+  inset: 0;
+  background: center / contain no-repeat;
+}
+
+.pot-ingredient-chip[data-food="steak-bite"] {
+  width: min(154px, 30vw);
+  height: min(75px, 14.5vw);
+  filter: drop-shadow(0 8px 6px rgba(91, 59, 69, 0.18));
+}
+
+.pot-ingredient-chip[data-food="steak-bite"] .pot-food-art {
+  background-image: url("assets/steak-in-pot.png?v=1");
+}
+
+.pot-ingredient-chip[data-food="seafood-bite"] {
+  width: min(390px, 66vw);
+  height: min(112px, 20vw);
+  filter: drop-shadow(0 8px 6px rgba(91, 59, 69, 0.16));
+}
+
+.pot-ingredient-chip[data-food="seafood-bite"] .pot-food-art {
+  background-image: none;
+}
+
+.seafood-piece {
+  position: absolute;
+  display: block;
+  background: center / contain no-repeat;
+  transform: rotate(var(--seafood-rotate));
+  transform-origin: center;
+}
+
+.seafood-fish {
+  left: 46.5%;
+  top: 20%;
+  width: 40%;
+  height: 70%;
+  background-image: url("assets/fish-in-pot.png?v=2");
+  --seafood-rotate: -20deg;
+}
+
+.seafood-shrimp {
+  width: 27%;
+  height: 68%;
+  background-image: url("assets/shrimp-in-pot.png?v=1");
+  --seafood-rotate: 180deg;
+}
+
+.seafood-shrimp-1 {
+  left: 105%;
+  top: 27%;
+}
+
+.seafood-shrimp-2 {
+  left: 126%;
+  top: 45%;
+}
+
+.pot-wrap.stirring .seafood-fish {
+  animation: seafood-fish-stir 820ms ease-in-out both;
+}
+
+.pot-wrap.stirring .seafood-shrimp-1 {
+  animation: seafood-shrimp-stir 820ms ease-in-out both;
+}
+
+.pot-wrap.stirring .seafood-shrimp-2 {
+  animation: seafood-shrimp-stir-alt 820ms ease-in-out both;
+}
+
+.pot-ingredient-chip[data-food="tofu"] {
+  width: min(250px, 47vw);
+  height: min(78px, 15vw);
+  filter: drop-shadow(0 8px 6px rgba(91, 59, 69, 0.16));
+}
+
+.pot-ingredient-chip[data-food="tofu"] .pot-food-art {
+  background-image: none;
+}
+
+.tofu-piece {
+  position: absolute;
+  display: block;
+  width: 34%;
+  height: 82%;
+  background: url("assets/tofu-cube-in-pot.png?v=2") center / contain no-repeat;
+  transform: rotate(var(--tofu-rotate));
+  transform-origin: center;
+}
+
+.tofu-cube-1 {
+  left: 0;
+  top: 13%;
+  --tofu-rotate: -8deg;
+}
+
+.tofu-cube-2 {
+  left: 22%;
+  top: 3%;
+  --tofu-rotate: 6deg;
+}
+
+.tofu-cube-3 {
+  left: 44%;
+  top: 15%;
+  --tofu-rotate: -5deg;
+}
+
+.tofu-cube-4 {
+  left: 64%;
+  top: 32%;
+  --tofu-rotate: 7deg;
+}
+
+.pot-wrap.stirring .tofu-cube-1,
+.pot-wrap.stirring .tofu-cube-3 {
+  animation: tofu-stir 820ms ease-in-out both;
+}
+
+.pot-wrap.stirring .tofu-cube-2,
+.pot-wrap.stirring .tofu-cube-4 {
+  animation: tofu-stir-alt 820ms ease-in-out both;
+}
+
+.pot-ingredient-chip[data-food="cheese"] {
+  width: 100%;
+  height: 100%;
+  filter: none;
+}
+
+.pot-ingredient-chip[data-food="cheese"] .pot-food-art {
+  background-image: none;
+}
+
+.cheese-shred {
+  position: absolute;
+  display: block;
+  left: var(--x);
+  top: var(--y);
+  width: calc(var(--shred-w, 14px) * 1.75);
+  height: calc(var(--shred-h, 4px) * 1.55);
+  border-radius: 999px;
+  background: var(--shred-color, #ffc52e);
+  transform: translate(-50%, -50%) rotate(var(--shred-rotate, 0deg)) scale(var(--shred-scale, 1));
+  transform-origin: center;
+  box-shadow:
+    0 1px 1px rgba(91, 59, 69, 0.16),
+    inset 0 -1px 0 rgba(189, 117, 12, 0.14);
+}
+
+.cheese-shred-1 { --x: 7%; --y: 39%; --shred-w: 12px; --shred-h: 4px; --shred-color: #ffd865; --shred-rotate: -18deg; --shred-scale: 0.9; }
+.cheese-shred-2 { --x: 13%; --y: 58%; --shred-w: 15px; --shred-h: 4px; --shred-color: #ffb11f; --shred-rotate: 16deg; --shred-scale: 0.85; }
+.cheese-shred-3 { --x: 19%; --y: 31%; --shred-w: 13px; --shred-h: 5px; --shred-color: #ffe494; --shred-rotate: 42deg; --shred-scale: 0.75; }
+.cheese-shred-4 { --x: 24%; --y: 70%; --shred-w: 16px; --shred-h: 4px; --shred-color: #ffc52e; --shred-rotate: -30deg; --shred-scale: 0.9; }
+.cheese-shred-5 { --x: 30%; --y: 45%; --shred-w: 11px; --shred-h: 4px; --shred-color: #ffd865; --shred-rotate: 8deg; --shred-scale: 0.8; }
+.cheese-shred-6 { --x: 36%; --y: 62%; --shred-w: 17px; --shred-h: 5px; --shred-color: #f6a817; --shred-rotate: 26deg; --shred-scale: 0.82; }
+.cheese-shred-7 { --x: 42%; --y: 27%; --shred-w: 12px; --shred-h: 4px; --shred-color: #ffe494; --shred-rotate: -28deg; --shred-scale: 0.75; }
+.cheese-shred-8 { --x: 48%; --y: 75%; --shred-w: 14px; --shred-h: 4px; --shred-color: #ffbf26; --shred-rotate: 41deg; --shred-scale: 0.86; }
+.cheese-shred-9 { --x: 54%; --y: 42%; --shred-w: 16px; --shred-h: 5px; --shred-color: #ffd45c; --shred-rotate: -9deg; --shred-scale: 0.82; }
+.cheese-shred-10 { --x: 60%; --y: 64%; --shred-w: 11px; --shred-h: 4px; --shred-color: #ffe494; --shred-rotate: -21deg; --shred-scale: 0.75; }
+.cheese-shred-11 { --x: 66%; --y: 34%; --shred-w: 15px; --shred-h: 4px; --shred-color: #ffb11f; --shred-rotate: 28deg; --shred-scale: 0.88; }
+.cheese-shred-12 { --x: 72%; --y: 53%; --shred-w: 17px; --shred-h: 5px; --shred-color: #ffc52e; --shred-rotate: -31deg; --shred-scale: 0.86; }
+.cheese-shred-13 { --x: 78%; --y: 72%; --shred-w: 12px; --shred-h: 4px; --shred-color: #ffd865; --shred-rotate: 13deg; --shred-scale: 0.78; }
+.cheese-shred-14 { --x: 84%; --y: 44%; --shred-w: 15px; --shred-h: 4px; --shred-color: #f6a817; --shred-rotate: -38deg; --shred-scale: 0.82; }
+.cheese-shred-15 { --x: 90%; --y: 61%; --shred-w: 11px; --shred-h: 4px; --shred-color: #ffe494; --shred-rotate: 20deg; --shred-scale: 0.75; }
+.cheese-shred-16 { --x: 16%; --y: 78%; --shred-w: 13px; --shred-h: 4px; --shred-color: #ffc52e; --shred-rotate: 48deg; --shred-scale: 0.82; }
+.cheese-shred-17 { --x: 32%; --y: 25%; --shred-w: 12px; --shred-h: 4px; --shred-color: #ffb11f; --shred-rotate: 11deg; --shred-scale: 0.72; }
+.cheese-shred-18 { --x: 46%; --y: 52%; --shred-w: 13px; --shred-h: 4px; --shred-color: #ffe494; --shred-rotate: 36deg; --shred-scale: 0.78; }
+.cheese-shred-19 { --x: 58%; --y: 21%; --shred-w: 15px; --shred-h: 5px; --shred-color: #ffd865; --shred-rotate: -34deg; --shred-scale: 0.8; }
+.cheese-shred-20 { --x: 68%; --y: 78%; --shred-w: 14px; --shred-h: 4px; --shred-color: #ffbf26; --shred-rotate: -18deg; --shred-scale: 0.84; }
+.cheese-shred-21 { --x: 82%; --y: 26%; --shred-w: 12px; --shred-h: 4px; --shred-color: #ffe494; --shred-rotate: 43deg; --shred-scale: 0.72; }
+.cheese-shred-22 { --x: 93%; --y: 38%; --shred-w: 13px; --shred-h: 4px; --shred-color: #ffc52e; --shred-rotate: -12deg; --shred-scale: 0.78; }
+.cheese-shred-23 { --x: 9%; --y: 68%; --shred-w: 10px; --shred-h: 4px; --shred-color: #ffe494; --shred-rotate: -42deg; --shred-scale: 0.7; }
+.cheese-shred-24 { --x: 22%; --y: 49%; --shred-w: 14px; --shred-h: 5px; --shred-color: #f6a817; --shred-rotate: 5deg; --shred-scale: 0.84; }
+.cheese-shred-25 { --x: 39%; --y: 84%; --shred-w: 12px; --shred-h: 4px; --shred-color: #ffd865; --shred-rotate: -15deg; --shred-scale: 0.75; }
+.cheese-shred-26 { --x: 52%; --y: 68%; --shred-w: 16px; --shred-h: 4px; --shred-color: #ffb11f; --shred-rotate: 24deg; --shred-scale: 0.84; }
+.cheese-shred-27 { --x: 63%; --y: 47%; --shred-w: 11px; --shred-h: 4px; --shred-color: #ffe494; --shred-rotate: -27deg; --shred-scale: 0.72; }
+.cheese-shred-28 { --x: 74%; --y: 66%; --shred-w: 13px; --shred-h: 4px; --shred-color: #ffd865; --shred-rotate: 37deg; --shred-scale: 0.8; }
+.cheese-shred-29 { --x: 87%; --y: 82%; --shred-w: 15px; --shred-h: 4px; --shred-color: #ffc52e; --shred-rotate: -40deg; --shred-scale: 0.82; }
+.cheese-shred-30 { --x: 95%; --y: 54%; --shred-w: 10px; --shred-h: 4px; --shred-color: #ffe494; --shred-rotate: 18deg; --shred-scale: 0.7; }
+.cheese-shred-31 { --x: 28%; --y: 35%; --shred-w: 12px; --shred-h: 4px; --shred-color: #ffbf26; --shred-rotate: -24deg; --shred-scale: 0.75; }
+.cheese-shred-32 { --x: 35%; --y: 55%; --shred-w: 10px; --shred-h: 4px; --shred-color: #ffe494; --shred-rotate: 18deg; --shred-scale: 0.7; }
+.cheese-shred-33 { --x: 43%; --y: 39%; --shred-w: 14px; --shred-h: 4px; --shred-color: #ffc52e; --shred-rotate: -42deg; --shred-scale: 0.82; }
+.cheese-shred-34 { --x: 50%; --y: 31%; --shred-w: 11px; --shred-h: 4px; --shred-color: #ffd865; --shred-rotate: 15deg; --shred-scale: 0.72; }
+.cheese-shred-35 { --x: 57%; --y: 55%; --shred-w: 13px; --shred-h: 5px; --shred-color: #f6a817; --shred-rotate: 48deg; --shred-scale: 0.8; }
+.cheese-shred-36 { --x: 64%; --y: 26%; --shred-w: 10px; --shred-h: 4px; --shred-color: #ffe494; --shred-rotate: -5deg; --shred-scale: 0.7; }
+.cheese-shred-37 { --x: 71%; --y: 83%; --shred-w: 12px; --shred-h: 4px; --shred-color: #ffd865; --shred-rotate: 29deg; --shred-scale: 0.75; }
+.cheese-shred-38 { --x: 79%; --y: 57%; --shred-w: 15px; --shred-h: 4px; --shred-color: #ffb11f; --shred-rotate: -16deg; --shred-scale: 0.84; }
+.cheese-shred-39 { --x: 86%; --y: 34%; --shred-w: 11px; --shred-h: 4px; --shred-color: #ffe494; --shred-rotate: 39deg; --shred-scale: 0.72; }
+.cheese-shred-40 { --x: 91%; --y: 72%; --shred-w: 14px; --shred-h: 5px; --shred-color: #ffc52e; --shred-rotate: -29deg; --shred-scale: 0.8; }
+.cheese-shred-41 { --x: 18%; --y: 39%; --shred-w: 10px; --shred-h: 4px; --shred-color: #ffe494; --shred-rotate: -7deg; --shred-scale: 0.68; }
+.cheese-shred-42 { --x: 76%; --y: 43%; --shred-w: 12px; --shred-h: 4px; --shred-color: #ffd865; --shred-rotate: 8deg; --shred-scale: 0.72; }
+
+.pot-ingredient-chip.entering[data-food="cheese"] .cheese-shred {
+  animation: cheese-sprinkle 400ms ease-out both;
+}
+
+.pot-wrap.stirring .cheese-shred {
+  animation: cheese-stir 820ms ease-in-out both;
+}
+
+.pot-ingredient-chip[data-food="spicy-peppers"] {
+  width: 100%;
+  height: 100%;
+  filter: none;
+}
+
+.pot-ingredient-chip[data-food="spicy-peppers"] .pot-food-art {
+  background-image: none;
+}
+
+.pepper-flake {
+  position: absolute;
+  display: block;
+  width: var(--flake-w, 10px);
+  height: var(--flake-h, 6px);
+  border-radius: 60% 42% 55% 45%;
+  background: var(--flake-color, #cf152a);
+  transform: translate(-50%, -50%) rotate(var(--flake-rotate, 0deg)) scale(var(--flake-scale, 1));
+  transform-origin: center;
+  box-shadow: 0 1px 1px rgba(91, 59, 69, 0.12);
+}
+
+.pepper-flake-1 { left: 8%; top: 38%; --flake-w: 8px; --flake-h: 5px; --flake-color: #c91524; --flake-rotate: -18deg; }
+.pepper-flake-2 { left: 15%; top: 57%; --flake-w: 11px; --flake-h: 6px; --flake-color: #f05b3d; --flake-rotate: 14deg; }
+.pepper-flake-3 { left: 22%; top: 34%; --flake-w: 9px; --flake-h: 7px; --flake-color: #aa0f22; --flake-rotate: 33deg; }
+.pepper-flake-4 { left: 29%; top: 68%; --flake-w: 10px; --flake-h: 5px; --flake-color: #e24b2f; --flake-rotate: -35deg; }
+.pepper-flake-5 { left: 35%; top: 45%; --flake-w: 7px; --flake-h: 6px; --flake-color: #e4d889; --flake-rotate: 9deg; }
+.pepper-flake-6 { left: 42%; top: 61%; --flake-w: 12px; --flake-h: 7px; --flake-color: #cf152a; --flake-rotate: 24deg; }
+.pepper-flake-7 { left: 49%; top: 29%; --flake-w: 8px; --flake-h: 6px; --flake-color: #f2633e; --flake-rotate: -26deg; }
+.pepper-flake-8 { left: 55%; top: 72%; --flake-w: 9px; --flake-h: 6px; --flake-color: #a90d1f; --flake-rotate: 41deg; }
+.pepper-flake-9 { left: 61%; top: 43%; --flake-w: 11px; --flake-h: 6px; --flake-color: #df3a2d; --flake-rotate: -8deg; }
+.pepper-flake-10 { left: 67%; top: 64%; --flake-w: 7px; --flake-h: 6px; --flake-color: #eadf94; --flake-rotate: -18deg; }
+.pepper-flake-11 { left: 73%; top: 35%; --flake-w: 10px; --flake-h: 7px; --flake-color: #bf1026; --flake-rotate: 28deg; }
+.pepper-flake-12 { left: 80%; top: 54%; --flake-w: 11px; --flake-h: 6px; --flake-color: #f05a3a; --flake-rotate: -31deg; }
+.pepper-flake-13 { left: 86%; top: 71%; --flake-w: 8px; --flake-h: 5px; --flake-color: #c41525; --flake-rotate: 12deg; }
+.pepper-flake-14 { left: 20%; top: 77%; --flake-w: 7px; --flake-h: 5px; --flake-color: #e4d889; --flake-rotate: 45deg; }
+.pepper-flake-15 { left: 37%; top: 23%; --flake-w: 9px; --flake-h: 6px; --flake-color: #b40f21; --flake-rotate: 10deg; }
+.pepper-flake-16 { left: 52%; top: 52%; --flake-w: 8px; --flake-h: 5px; --flake-color: #f05a3a; --flake-rotate: 37deg; }
+.pepper-flake-17 { left: 69%; top: 79%; --flake-w: 9px; --flake-h: 6px; --flake-color: #db352b; --flake-rotate: -17deg; }
+.pepper-flake-18 { left: 91%; top: 45%; --flake-w: 7px; --flake-h: 5px; --flake-color: #a90d1f; --flake-rotate: 21deg; }
+.pepper-flake-19 { left: 11%; top: 72%; --flake-w: 9px; --flake-h: 5px; --flake-color: #e24b2f; --flake-rotate: 38deg; }
+.pepper-flake-20 { left: 18%; top: 26%; --flake-w: 7px; --flake-h: 5px; --flake-color: #b40f21; --flake-rotate: -44deg; }
+.pepper-flake-21 { left: 27%; top: 51%; --flake-w: 8px; --flake-h: 6px; --flake-color: #f2633e; --flake-rotate: 6deg; }
+.pepper-flake-22 { left: 33%; top: 82%; --flake-w: 10px; --flake-h: 5px; --flake-color: #c91524; --flake-rotate: -12deg; }
+.pepper-flake-23 { left: 44%; top: 36%; --flake-w: 7px; --flake-h: 5px; --flake-color: #e4d889; --flake-rotate: 28deg; }
+.pepper-flake-24 { left: 58%; top: 20%; --flake-w: 9px; --flake-h: 6px; --flake-color: #cf152a; --flake-rotate: -33deg; }
+.pepper-flake-25 { left: 63%; top: 58%; --flake-w: 8px; --flake-h: 5px; --flake-color: #f05b3d; --flake-rotate: 15deg; }
+.pepper-flake-26 { left: 76%; top: 76%; --flake-w: 10px; --flake-h: 6px; --flake-color: #aa0f22; --flake-rotate: -27deg; }
+.pepper-flake-27 { left: 84%; top: 27%; --flake-w: 8px; --flake-h: 5px; --flake-color: #df3a2d; --flake-rotate: 42deg; }
+.pepper-flake-28 { left: 88%; top: 62%; --flake-w: 9px; --flake-h: 6px; --flake-color: #eadf94; --flake-rotate: -8deg; }
+.pepper-flake-29 { left: 47%; top: 84%; --flake-w: 7px; --flake-h: 5px; --flake-color: #bf1026; --flake-rotate: 31deg; }
+.pepper-flake-30 { left: 71%; top: 48%; --flake-w: 8px; --flake-h: 5px; --flake-color: #f05a3a; --flake-rotate: -38deg; }
+.pepper-flake-31 { left: 6%; top: 68%; --flake-w: 8px; --flake-h: 5px; --flake-color: #bf1026; --flake-rotate: 23deg; }
+.pepper-flake-32 { left: 13%; top: 83%; --flake-w: 10px; --flake-h: 6px; --flake-color: #f05b3d; --flake-rotate: -19deg; }
+.pepper-flake-33 { left: 24%; top: 88%; --flake-w: 7px; --flake-h: 5px; --flake-color: #e4d889; --flake-rotate: 36deg; }
+.pepper-flake-34 { left: 78%; top: 38%; --flake-w: 8px; --flake-h: 5px; --flake-color: #c91524; --flake-rotate: -34deg; }
+.pepper-flake-35 { left: 83%; top: 50%; --flake-w: 9px; --flake-h: 6px; --flake-color: #f2633e; --flake-rotate: 16deg; }
+.pepper-flake-36 { left: 92%; top: 31%; --flake-w: 8px; --flake-h: 5px; --flake-color: #aa0f22; --flake-rotate: 44deg; }
+.pepper-flake-37 { left: 95%; top: 58%; --flake-w: 10px; --flake-h: 6px; --flake-color: #df3a2d; --flake-rotate: -22deg; }
+.pepper-flake-38 { left: 88%; top: 81%; --flake-w: 7px; --flake-h: 5px; --flake-color: #eadf94; --flake-rotate: 10deg; }
+.pepper-flake-39 { left: 62%; top: 32%; --flake-w: 9px; --flake-h: 5px; --flake-color: #c91524; --flake-rotate: -12deg; --flake-scale: 0.9; }
+.pepper-flake-40 { left: 66%; top: 38%; --flake-w: 8px; --flake-h: 5px; --flake-color: #f05b3d; --flake-rotate: 18deg; --flake-scale: 0.8; }
+.pepper-flake-41 { left: 71%; top: 30%; --flake-w: 8px; --flake-h: 5px; --flake-color: #e4d889; --flake-rotate: 35deg; --flake-scale: 0.75; }
+.pepper-flake-42 { left: 75%; top: 42%; --flake-w: 9px; --flake-h: 6px; --flake-color: #aa0f22; --flake-rotate: -25deg; --flake-scale: 0.9; }
+.pepper-flake-43 { left: 80%; top: 34%; --flake-w: 8px; --flake-h: 5px; --flake-color: #df3a2d; --flake-rotate: 10deg; --flake-scale: 0.7; }
+.pepper-flake-44 { left: 86%; top: 40%; --flake-w: 9px; --flake-h: 6px; --flake-color: #f2633e; --flake-rotate: -8deg; --flake-scale: 0.85; }
+.pepper-flake-45 { left: 68%; top: 52%; --flake-w: 8px; --flake-h: 5px; --flake-color: #bf1026; --flake-rotate: 22deg; --flake-scale: 0.75; }
+.pepper-flake-46 { left: 73%; top: 58%; --flake-w: 9px; --flake-h: 6px; --flake-color: #e24b2f; --flake-rotate: -18deg; --flake-scale: 0.9; }
+.pepper-flake-47 { left: 78%; top: 50%; --flake-w: 8px; --flake-h: 5px; --flake-color: #eadf94; --flake-rotate: 40deg; --flake-scale: 0.8; }
+.pepper-flake-48 { left: 84%; top: 55%; --flake-w: 7px; --flake-h: 5px; --flake-color: #cf152a; --flake-rotate: -30deg; --flake-scale: 0.7; }
+.pepper-flake-49 { left: 88%; top: 62%; --flake-w: 9px; --flake-h: 6px; --flake-color: #f05a3a; --flake-rotate: 15deg; --flake-scale: 0.85; }
+.pepper-flake-50 { left: 64%; top: 66%; --flake-w: 8px; --flake-h: 5px; --flake-color: #b40f21; --flake-rotate: -40deg; --flake-scale: 0.75; }
+.pepper-flake-51 { left: 70%; top: 69%; --flake-w: 8px; --flake-h: 5px; --flake-color: #db352b; --flake-rotate: 28deg; --flake-scale: 0.8; }
+.pepper-flake-52 { left: 76%; top: 64%; --flake-w: 9px; --flake-h: 6px; --flake-color: #e4d889; --flake-rotate: -10deg; --flake-scale: 0.9; }
+.pepper-flake-53 { left: 82%; top: 70%; --flake-w: 8px; --flake-h: 5px; --flake-color: #a90d1f; --flake-rotate: 33deg; --flake-scale: 0.75; }
+.pepper-flake-54 { left: 90%; top: 48%; --flake-w: 7px; --flake-h: 5px; --flake-color: #f2633e; --flake-rotate: -20deg; --flake-scale: 0.7; }
+.pepper-flake-55 { left: 61%; top: 45%; --flake-w: 8px; --flake-h: 5px; --flake-color: #c91524; --flake-rotate: 12deg; --flake-scale: 0.8; }
+.pepper-flake-56 { left: 69%; top: 28%; --flake-w: 7px; --flake-h: 5px; --flake-color: #eadf94; --flake-rotate: -35deg; --flake-scale: 0.65; }
+.pepper-flake-57 { left: 83%; top: 29%; --flake-w: 8px; --flake-h: 5px; --flake-color: #bf1026; --flake-rotate: 20deg; --flake-scale: 0.75; }
+.pepper-flake-58 { left: 87%; top: 70%; --flake-w: 8px; --flake-h: 6px; --flake-color: #df3a2d; --flake-rotate: -15deg; --flake-scale: 0.8; }
+
+.pot-ingredient-chip.entering[data-food="spicy-peppers"] .pepper-flake {
+  animation: pepper-sprinkle 380ms ease-out both;
+}
+
+.pot-wrap.stirring .pepper-flake {
+  animation: pepper-stir 820ms ease-in-out both;
+}
+
+.controls {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  gap: 12px;
+  width: min(560px, 100%);
+  margin: 6px 0 8px;
+}
+
+.controls button {
+  line-height: 1.12;
+  white-space: normal;
+}
+
+#playButton {
+  justify-self: end;
+}
+
+#submitButton {
+  justify-self: center;
+}
+
+#nextButton {
+  justify-self: start;
+}
+
+.primary-button,
+.secondary-button,
+.utility-button,
+.ingredient-card {
+  min-height: 48px;
+  border: 0;
+  border-radius: 18px;
+  color: var(--ink);
+  cursor: pointer;
+  font-weight: 800;
+  box-shadow: 0 8px 0 rgba(86, 67, 67, 0.14);
+  transition: transform 140ms ease, box-shadow 140ms ease, filter 140ms ease;
+}
+
+.primary-button {
+  padding: 0 26px;
+  background: var(--pink);
+}
+
+.secondary-button {
+  padding: 0 22px;
+  background: var(--mint);
+}
+
+.serve-button {
+  position: relative;
+  isolation: isolate;
+  min-width: 112px;
+  min-height: 56px;
+  padding: 4px 25px 9px;
+  border-radius: 6px;
+  background: transparent;
+  box-shadow: none;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.62);
+}
+
+.serve-button::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: 7px;
+  right: 7px;
+  top: 4px;
+  height: 42px;
+  border-radius: 0 0 48px 48px / 0 0 36px 36px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.86) 0 10%, rgba(255, 255, 255, 0) 11%),
+    linear-gradient(180deg, #d8f4ff 0 24%, #b9e5f7 25% 100%);
+  border-top: 5px solid rgba(101, 86, 109, 0.46);
+  box-shadow:
+    inset 0 -8px 0 rgba(92, 151, 185, 0.11),
+    0 8px 0 rgba(86, 67, 67, 0.14);
+}
+
+.serve-button::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: 36px;
+  right: 36px;
+  bottom: 3px;
+  height: 8px;
+  border-radius: 2px;
+  background: #9bd3ec;
+  box-shadow: 0 4px 0 rgba(86, 67, 67, 0.12);
+}
+
+.serve-button span {
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  transform: translateY(1px);
+}
+
+.utility-button {
+  min-height: 42px;
+  padding: 0 16px;
+  border: 2px solid rgba(101, 86, 109, 0.12);
+  border-radius: 14px;
+  background: rgba(255, 248, 237, 0.92);
+  color: rgba(64, 55, 68, 0.84);
+  font-size: 0.9rem;
+  box-shadow: 0 5px 0 rgba(86, 67, 67, 0.09);
+}
+
+.primary-button:hover,
+.secondary-button:hover,
+.utility-button:hover,
+.ingredient-card:hover {
+  filter: saturate(1.05);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 0 rgba(86, 67, 67, 0.14);
+}
+
+.serve-button:hover {
+  box-shadow: none;
+}
+
+.serve-button:hover::before {
+  box-shadow:
+    inset 0 -8px 0 rgba(92, 151, 185, 0.11),
+    0 10px 0 rgba(86, 67, 67, 0.14);
+}
+
+.primary-button:disabled,
+.secondary-button:disabled {
+  cursor: not-allowed;
+  filter: grayscale(0.45) saturate(0.45);
+  opacity: 0.48;
+  transform: none;
+  box-shadow: 0 5px 0 rgba(86, 67, 67, 0.08);
+}
+
+.primary-button:disabled:hover,
+.secondary-button:disabled:hover {
+  filter: grayscale(0.45) saturate(0.45);
+  transform: none;
+  box-shadow: 0 5px 0 rgba(86, 67, 67, 0.08);
+}
+
+.primary-button:active,
+.secondary-button:active,
+.utility-button:active,
+.ingredient-card:active {
+  transform: translateY(3px);
+  box-shadow: 0 4px 0 rgba(86, 67, 67, 0.14);
+}
+
+.serve-button:active {
+  box-shadow: none;
+}
+
+.serve-button:active::before {
+  box-shadow:
+    inset 0 -7px 0 rgba(92, 151, 185, 0.1),
+    0 4px 0 rgba(86, 67, 67, 0.14);
+}
+
+.utility-button:disabled {
+  cursor: not-allowed;
+  filter: grayscale(0.15) opacity(0.62);
+  transform: none;
+  box-shadow: 0 3px 0 rgba(86, 67, 67, 0.06);
+}
+
+.feedback {
+  position: relative;
+  width: min(760px, 100%);
+  min-height: 26px;
+  margin: 0 0 2px;
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.ladle-hint {
+  margin: 3px 0 4px;
+  color: rgba(64, 55, 68, 0.56);
+  font-size: 0.86rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.feedback.good {
+  color: #28735f;
+  animation: feedback-yum-pop 1.25s ease both;
+  text-shadow:
+    0 0 0 rgba(255, 231, 154, 0),
+    0 2px 0 rgba(255, 255, 255, 0.75);
+}
+
+.feedback.bad {
+  color: #9a4469;
+}
+
+.feedback.good::before,
+.feedback.good::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 18px;
+  height: 18px;
+  pointer-events: none;
+  background: #ffd45f;
+  clip-path: polygon(50% 0, 62% 36%, 100% 50%, 62% 64%, 50% 100%, 38% 64%, 0 50%, 38% 36%);
+  filter: drop-shadow(0 2px 0 rgba(86, 67, 67, 0.08));
+  opacity: 0;
+}
+
+.feedback.good::before {
+  left: max(8px, calc(50% - 310px));
+  animation: feedback-star-left 1.25s ease both;
+}
+
+.feedback.good::after {
+  right: max(8px, calc(50% - 310px));
+  background: #ffc0cf;
+  animation: feedback-star-right 1.25s ease both;
+}
+
+.recipe {
+  width: min(620px, 100%);
+  margin-top: 8px;
+  padding: 14px 16px;
+  border: 3px dashed rgba(101, 86, 109, 0.28);
+  border-radius: 20px;
+  background: rgba(255, 248, 237, 0.78);
+  line-height: 1.45;
+}
+
+.recipe strong {
+  color: var(--berry);
+}
+
+.ingredient-section {
+  margin-top: 18px;
+  padding: clamp(16px, 4vw, 24px);
+}
+
+.ingredient-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.ingredient-heading h2 {
+  margin-bottom: 0;
+}
+
+.ingredient-grid {
+  display: grid;
+  grid-template-columns: 0.85fr repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.ingredient-group {
+  display: grid;
+  align-content: start;
+  gap: 10px;
+  min-width: 0;
+  padding: 10px;
+  border: 2px solid rgba(255, 255, 255, 0.72);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.36);
+}
+
+.ingredient-group h3 {
+  margin: 0;
+  padding: 7px 10px;
+  border-radius: 12px;
+  color: rgba(64, 55, 68, 0.8);
+  font-size: 0.84rem;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.ingredient-group[data-group="broth"] h3 {
+  background: rgba(255, 231, 154, 0.78);
+}
+
+.ingredient-group[data-group="noodle"] h3 {
+  background: rgba(255, 216, 199, 0.82);
+}
+
+.ingredient-group[data-group="meat"] h3 {
+  background: rgba(240, 193, 154, 0.82);
+}
+
+.ingredient-group[data-group="topping"] h3 {
+  background: #f3b9c8;
+}
+
+.ingredient-group-list {
+  display: grid;
+  gap: 10px;
+}
+
+.ingredient-card {
+  position: relative;
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr);
+  grid-template-areas:
+    "mark name"
+    "mark theory";
+  align-items: center;
+  justify-items: start;
+  gap: 5px 8px;
+  min-height: 94px;
+  padding: 11px 12px;
+  overflow: hidden;
+  text-align: left;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.5), transparent 46%),
+    var(--card-color);
+}
+
+.ingredient-card:disabled {
+  cursor: not-allowed;
+  filter: grayscale(0.35);
+  transform: none;
+  box-shadow: 0 5px 0 rgba(86, 67, 67, 0.08);
+}
+
+.ingredient-card[data-unavailable="true"]:disabled .food-mark,
+.ingredient-card[data-unavailable="true"]:disabled .ingredient-name,
+.ingredient-card[data-unavailable="true"]:disabled .ingredient-theory {
+  opacity: 0.2;
+  filter: grayscale(0.7);
+}
+
+.ingredient-card[data-unavailable="true"]:disabled::after {
+  content: "NOT IN THIS SOUP";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 3;
+  width: min(82%, 150px);
+  padding: 7px 10px;
+  border-radius: 999px;
+  background: rgba(255, 252, 244, 0.88);
+  color: rgba(64, 55, 68, 0.72);
+  box-shadow: 0 4px 0 rgba(86, 67, 67, 0.08);
+  font-size: 0.62rem;
+  font-weight: 900;
+  letter-spacing: 0.035em;
+  line-height: 1.12;
+  text-align: center;
+  text-transform: uppercase;
+  transform: translate(-50%, -50%);
+}
+
+.ingredient-card[aria-pressed="true"] {
+  outline: 4px solid rgba(53, 123, 103, 0.35);
+  transform: translateY(-3px);
+}
+
+.food-mark {
+  position: relative;
+  grid-area: mark;
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  justify-self: center;
+}
+
+.food-mark::before,
+.food-mark::after,
+.food-mark span {
+  content: "";
+  position: absolute;
+}
+
+.food-mark::before,
+.food-mark::after {
+  display: none;
+}
+
+.food-mark span {
+  display: block;
+}
+
+.ingredient-card[data-vessel="bowl"] .food-mark::before {
+  display: none;
+}
+
+.ingredient-card[data-vessel="bowl"] .food-mark::after {
+  display: none;
+}
+
+.ingredient-card[data-food="base"] .food-mark span {
+  left: 5px;
+  top: 11px;
+  width: 36px;
+  height: 27px;
+  border: 2px solid rgba(75, 64, 78, 0.26);
+  border-radius: 48% 48% 44% 44% / 38% 38% 62% 62%;
+  background:
+    linear-gradient(180deg, #fff9e7 0 47%, #f4e5cf 48% 100%);
+  box-shadow:
+    inset 0 -5px 0 rgba(199, 157, 130, 0.18),
+    0 2px 0 rgba(76, 58, 64, 0.08);
+  overflow: hidden;
+}
+
+.ingredient-card[data-food="base"] .food-mark span::before {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 4px;
+  width: 24px;
+  height: 12px;
+  border-radius: 50%;
+  background: #ffd76f;
+  box-shadow:
+    inset 0 3px 0 rgba(255, 247, 190, 0.55),
+    0 0 0 2px rgba(228, 176, 69, 0.2);
+}
+
+.ingredient-card[data-food="base"] .food-mark span::after {
+  content: "";
+  position: absolute;
+  left: 7px;
+  top: 20px;
+  width: 19px;
+  height: 3px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.ingredient-card[data-vessel="jar"] .food-mark::before {
+  display: none;
+}
+
+.ingredient-card[data-vessel="jar"] .food-mark::after {
+  display: none;
+}
+
+.ingredient-card[data-vessel="plate"] .food-mark::before {
+  display: none;
+}
+
+.ingredient-card[data-vessel="plate"] .food-mark span {
+  left: 17px;
+  top: 20px;
+  width: 15px;
+  height: 15px;
+  border-radius: 4px;
+  background: rgba(64, 55, 68, 0.22);
+  transform: rotate(18deg);
+}
+
+.ingredient-card[data-vessel="scoop"] .food-mark::before {
+  display: none;
+}
+
+.ingredient-card[data-vessel="scoop"] .food-mark::after {
+  display: none;
+}
+
+.ingredient-card[data-food="springy-noodle"] .food-mark::before,
+.ingredient-card[data-food="springy-noodle"] .food-mark::after,
+.ingredient-card[data-food="soft-noodles"] .food-mark::before,
+.ingredient-card[data-food="soft-noodles"] .food-mark::after {
+  display: none;
+}
+
+.ingredient-card[data-vessel="cup"] .food-mark::before {
+  display: none;
+}
+
+.ingredient-card[data-vessel="cup"] .food-mark::after {
+  display: none;
+}
+
+.ingredient-card[data-food="corn"] .food-mark span {
+  left: 18px;
+  top: 13px;
+  width: 13px;
+  height: 25px;
+  border-radius: 999px;
+  background:
+    radial-gradient(circle at 50% 20%, rgba(255, 255, 255, 0.65) 0 2px, transparent 3px),
+    repeating-linear-gradient(180deg, #ffd24e 0 6px, #efb935 6px 10px);
+  border: 2px solid rgba(107, 80, 24, 0.18);
+}
+
+.ingredient-card[data-food="potato"] .food-mark span {
+  left: 15px;
+  top: 18px;
+  width: 21px;
+  height: 17px;
+  border-radius: 47% 55% 43% 52%;
+  background: #d9bb86;
+  box-shadow: inset 7px 2px 0 rgba(255, 255, 255, 0.22);
+  transform: rotate(-10deg);
+}
+
+.ingredient-card[data-food="shells"] .food-mark span {
+  left: 14px;
+  top: 18px;
+  width: 21px;
+  height: 18px;
+  border: 3px solid rgba(136, 100, 44, 0.3);
+  border-radius: 50% 50% 40% 40%;
+  background: #ffe1a3;
+  box-shadow: inset 0 -6px 0 rgba(255, 196, 98, 0.36);
+}
+
+.ingredient-card[data-food="pickle"] .food-mark span {
+  left: 17px;
+  top: 14px;
+  width: 14px;
+  height: 25px;
+  border-radius: 999px;
+  background:
+    radial-gradient(circle at 36% 28%, rgba(255, 255, 255, 0.7) 0 2px, transparent 3px),
+    #7fbf72;
+  border: 2px solid rgba(38, 93, 55, 0.24);
+  transform: rotate(14deg);
+}
+
+.ingredient-card[data-food="noodle"] .food-mark span {
+  left: 9px;
+  top: 19px;
+  width: 31px;
+  height: 16px;
+  border-top: 5px solid #f0b978;
+  border-radius: 50%;
+  transform: rotate(-8deg);
+}
+
+.ingredient-card[data-food="springy-noodle"] .food-mark span,
+.ingredient-card[data-food="soft-noodles"] .food-mark span {
+  left: -2px;
+  top: 2px;
+  width: 46px;
+  height: 42px;
+  border: 0;
+  border-radius: 0;
+  background: center / contain no-repeat;
+}
+
+.ingredient-card[data-food="springy-noodle"] .food-mark span::before,
+.ingredient-card[data-food="springy-noodle"] .food-mark span::after,
+.ingredient-card[data-food="soft-noodles"] .food-mark span::before,
+.ingredient-card[data-food="soft-noodles"] .food-mark span::after {
+  display: none;
+}
+
+.ingredient-card[data-food="springy-noodle"] .food-mark span {
+  background-image: url("assets/noodle-springy.png");
+}
+
+.ingredient-card[data-food="soft-noodles"] .food-mark span {
+  background-image: url("assets/noodle-soft.png?v=toasted");
+}
+
+.ingredient-card[data-food="steak-bite"] .food-mark span,
+.ingredient-card[data-food="seafood-bite"] .food-mark span,
+.ingredient-card[data-food="tofu"] .food-mark span {
+  left: -3px;
+  top: 4px;
+  width: 50px;
+  height: 42px;
+  border-radius: 0;
+  background: url("assets/meat-steak.png") center / contain no-repeat;
+  box-shadow: none;
+  transform: none;
+}
+
+.ingredient-card[data-food="tofu"] .food-mark span {
+  left: -4px;
+  top: 1px;
+  width: 54px;
+  height: 46px;
+  background-image: url("assets/tofu.png");
+}
+
+.ingredient-card[data-food="seafood-bite"] .food-mark span {
+  left: -5px;
+  top: 0;
+  width: 53px;
+  height: 47px;
+  border-radius: 0;
+  background: url("assets/seafood-bite.png") center / contain no-repeat;
+  box-shadow: none;
+  transform: none;
+}
+
+
+.ingredient-card[data-food="cheese"] .food-mark span {
+  left: -1px;
+  top: 3px;
+  width: 48px;
+  height: 42px;
+  background: url("assets/melty-cheese.png") center / contain no-repeat;
+  box-shadow: none;
+  transform: none;
+}
+
+.ingredient-card[data-food="spicy-peppers"] .food-mark span {
+  left: -4px;
+  top: 2px;
+  width: 52px;
+  height: 44px;
+  border-radius: 0;
+  background: url("assets/spicy-peppers.png") center / contain no-repeat;
+  box-shadow: none;
+  transform: none;
+}
+
+.ingredient-name {
+  grid-area: name;
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  font-size: 1rem;
+  line-height: 1.15;
+  align-self: end;
+}
+
+.ingredient-theory {
+  grid-area: theory;
+  min-width: 0;
+  max-width: 100%;
+  color: rgba(64, 55, 68, 0.58);
+  font-size: 0.72rem;
+  font-weight: 800;
+  line-height: 1.28;
+  overflow-wrap: anywhere;
+  align-self: start;
+}
+
+.sparkles {
+  position: absolute;
+  left: 1%;
+  right: 1%;
+  top: 2px;
+  height: min(410px, 88%);
+  z-index: 8;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.sparkles span {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: var(--size, 18px);
+  height: var(--size, 18px);
+  background: var(--sparkle-color, #ffd24e);
+  clip-path: polygon(50% 0, 62% 36%, 100% 50%, 62% 64%, 50% 100%, 38% 64%, 0 50%, 38% 36%);
+  opacity: 0;
+  filter: drop-shadow(0 3px 0 rgba(86, 67, 67, 0.08));
+  transform: translate(-50%, -50%) scale(0) rotate(var(--rot, 0deg));
+}
+
+.sparkles span:nth-child(1) {
+  --x: 9%;
+  --y: 48%;
+  --size: 26px;
+  --sparkle-color: #ffd45f;
+  --tx: -34px;
+  --ty: -22px;
+  --rot: -18deg;
+  --delay: 0;
+}
+
+.sparkles span:nth-child(2) {
+  --x: 15%;
+  --y: 28%;
+  --size: 16px;
+  --sparkle-color: #ff9fb5;
+  --tx: -18px;
+  --ty: -34px;
+  --rot: 22deg;
+  --delay: 35;
+}
+
+.sparkles span:nth-child(3) {
+  --x: 22%;
+  --y: 16%;
+  --size: 24px;
+  --sparkle-color: #fff2a8;
+  --tx: -10px;
+  --ty: -42px;
+  --rot: 42deg;
+  --delay: 70;
+}
+
+.sparkles span:nth-child(4) {
+  --x: 31%;
+  --y: 31%;
+  --size: 15px;
+  --sparkle-color: #bdebd9;
+  --tx: -14px;
+  --ty: -24px;
+  --rot: 8deg;
+  --delay: 20;
+}
+
+.sparkles span:nth-child(5) { --x: 39%; --y: 12%; --size: 28px; --sparkle-color: #ffcf6a; --tx: -5px; --ty: -46px; --rot: 58deg; --delay: 45; }
+.sparkles span:nth-child(6) { --x: 48%; --y: 24%; --size: 17px; --sparkle-color: #fff7d4; --tx: 0px; --ty: -32px; --rot: -36deg; --delay: 95; }
+.sparkles span:nth-child(7) { --x: 57%; --y: 13%; --size: 25px; --sparkle-color: #ffc4d5; --tx: 8px; --ty: -44px; --rot: 16deg; --delay: 55; }
+.sparkles span:nth-child(8) { --x: 67%; --y: 26%; --size: 18px; --sparkle-color: #ffd45f; --tx: 20px; --ty: -34px; --rot: -24deg; --delay: 80; }
+.sparkles span:nth-child(9) { --x: 77%; --y: 18%; --size: 27px; --sparkle-color: #c7f0df; --tx: 28px; --ty: -38px; --rot: 34deg; --delay: 25; }
+.sparkles span:nth-child(10) { --x: 88%; --y: 42%; --size: 23px; --sparkle-color: #ffb36d; --tx: 36px; --ty: -16px; --rot: -42deg; --delay: 65; }
+.sparkles span:nth-child(11) { --x: 13%; --y: 62%; --size: 18px; --sparkle-color: #fff0a8; --tx: -32px; --ty: 6px; --rot: 74deg; --delay: 120; }
+.sparkles span:nth-child(12) { --x: 20%; --y: 78%; --size: 24px; --sparkle-color: #ffc0cf; --tx: -22px; --ty: 26px; --rot: -12deg; --delay: 150; }
+.sparkles span:nth-child(13) { --x: 30%; --y: 67%; --size: 20px; --sparkle-color: #ffd24e; --tx: -14px; --ty: 18px; --rot: 28deg; --delay: 105; }
+.sparkles span:nth-child(14) { --x: 41%; --y: 79%; --size: 16px; --sparkle-color: #fff7d4; --tx: -4px; --ty: 34px; --rot: -54deg; --delay: 135; }
+.sparkles span:nth-child(15) { --x: 52%; --y: 70%; --size: 30px; --sparkle-color: #ffe47b; --tx: 0px; --ty: 24px; --rot: 45deg; --delay: 90; }
+.sparkles span:nth-child(16) { --x: 63%; --y: 78%; --size: 17px; --sparkle-color: #bdebd9; --tx: 10px; --ty: 34px; --rot: -20deg; --delay: 140; }
+.sparkles span:nth-child(17) { --x: 73%; --y: 66%; --size: 22px; --sparkle-color: #ff9fb5; --tx: 22px; --ty: 17px; --rot: 20deg; --delay: 115; }
+.sparkles span:nth-child(18) { --x: 84%; --y: 70%; --size: 19px; --sparkle-color: #fff0a8; --tx: 33px; --ty: 24px; --rot: -34deg; --delay: 155; }
+.sparkles span:nth-child(19) { --x: 7%; --y: 35%; --size: 13px; --sparkle-color: #fff7d4; --tx: -26px; --ty: -28px; --rot: 10deg; --delay: 60; }
+.sparkles span:nth-child(20) { --x: 94%; --y: 32%; --size: 15px; --sparkle-color: #ffc4d5; --tx: 26px; --ty: -24px; --rot: 46deg; --delay: 75; }
+.sparkles span:nth-child(21) { --x: 24%; --y: 48%; --size: 14px; --sparkle-color: #ffb36d; --tx: -18px; --ty: -4px; --rot: -8deg; --delay: 30; }
+.sparkles span:nth-child(22) { --x: 37%; --y: 43%; --size: 20px; --sparkle-color: #c7f0df; --tx: -8px; --ty: -8px; --rot: 65deg; --delay: 10; }
+.sparkles span:nth-child(23) { --x: 61%; --y: 43%; --size: 21px; --sparkle-color: #ffd45f; --tx: 10px; --ty: -8px; --rot: -65deg; --delay: 15; }
+.sparkles span:nth-child(24) { --x: 76%; --y: 49%; --size: 14px; --sparkle-color: #fff7d4; --tx: 22px; --ty: -2px; --rot: 12deg; --delay: 40; }
+.sparkles span:nth-child(25) { --x: 32%; --y: 91%; --size: 22px; --sparkle-color: #ffcf6a; --tx: -10px; --ty: 18px; --rot: -26deg; --delay: 170; }
+.sparkles span:nth-child(26) { --x: 45%; --y: 96%; --size: 16px; --sparkle-color: #ffc0cf; --tx: -2px; --ty: 20px; --rot: 32deg; --delay: 185; }
+.sparkles span:nth-child(27) { --x: 57%; --y: 94%; --size: 24px; --sparkle-color: #fff2a8; --tx: 6px; --ty: 18px; --rot: -45deg; --delay: 175; }
+.sparkles span:nth-child(28) { --x: 70%; --y: 91%; --size: 18px; --sparkle-color: #bdebd9; --tx: 14px; --ty: 20px; --rot: 18deg; --delay: 190; }
+.sparkles span:nth-child(29) { --x: 50%; --y: 54%; --size: 12px; --sparkle-color: #fff7d4; --tx: 0px; --ty: -10px; --rot: 90deg; --delay: 5; }
+.sparkles span:nth-child(30) { --x: 91%; --y: 58%; --size: 22px; --sparkle-color: #ffd24e; --tx: 34px; --ty: 6px; --rot: -16deg; --delay: 100; }
+
+.pot-wrap.celebrate .bubbles span {
+  animation-duration: 0.65s;
+}
+
+.pot-wrap.celebrate .pot {
+  animation: pot-happy-bounce 0.72s ease both;
+}
+
+.sparkles.show {
+  animation: sparkle-layer 1.35s ease both;
+}
+
+.sparkles.show span {
+  animation: sparkle-burst 1.25s cubic-bezier(0.2, 0.9, 0.24, 1) both;
+  animation-delay: calc((var(--delay, 0) + 0) * 1ms);
+}
+
+.pot-wrap.wobble {
+  animation: wobble 0.52s ease both;
+}
+
+footer {
+  padding: 12px 16px 22px;
+  color: var(--muted);
+  text-align: center;
+  font-size: 0.92rem;
+}
+
+@keyframes drift {
+  0%,
+  100% {
+    opacity: 0.34;
+    transform: translateY(8px) scale(0.95);
+  }
+  50% {
+    opacity: 0.72;
+    transform: translateY(-8px) scale(1.05);
+  }
+}
+
+@keyframes bubble {
+  0%,
+  100% {
+    transform: translateY(4px) scale(0.85);
+  }
+  50% {
+    transform: translateY(-7px) scale(1.1);
+  }
+}
+
+@keyframes pot-happy-bounce {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  35% {
+    transform: translateY(-8px) scale(1.015);
+  }
+  62% {
+    transform: translateY(3px) scale(0.995);
+  }
+}
+
+@keyframes feedback-yum-pop {
+  0% {
+    opacity: 0;
+    transform: translateY(4px) scale(0.96);
+    text-shadow:
+      0 0 0 rgba(255, 231, 154, 0),
+      0 2px 0 rgba(255, 255, 255, 0.75);
+  }
+  20% {
+    opacity: 1;
+    transform: translateY(0) scale(1.06);
+    text-shadow:
+      0 0 14px rgba(255, 212, 95, 0.9),
+      0 0 24px rgba(255, 192, 207, 0.45),
+      0 2px 0 rgba(255, 255, 255, 0.82);
+  }
+  46% {
+    transform: translateY(0) scale(1);
+    text-shadow:
+      0 0 20px rgba(189, 235, 217, 0.75),
+      0 0 26px rgba(255, 207, 106, 0.55),
+      0 2px 0 rgba(255, 255, 255, 0.82);
+  }
+  74% {
+    text-shadow:
+      0 0 12px rgba(255, 231, 154, 0.65),
+      0 2px 0 rgba(255, 255, 255, 0.78);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    text-shadow:
+      0 0 0 rgba(255, 231, 154, 0),
+      0 2px 0 rgba(255, 255, 255, 0.75);
+  }
+}
+
+@keyframes feedback-star-left {
+  0% {
+    opacity: 0;
+    transform: translate(-8px, -50%) scale(0) rotate(-40deg);
+  }
+  24%,
+  62% {
+    opacity: 1;
+    transform: translate(-22px, -50%) scale(1.18) rotate(26deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-32px, -70%) scale(0.5) rotate(92deg);
+  }
+}
+
+@keyframes feedback-star-right {
+  0% {
+    opacity: 0;
+    transform: translate(8px, -50%) scale(0) rotate(38deg);
+  }
+  30%,
+  66% {
+    opacity: 1;
+    transform: translate(22px, -50%) scale(1.14) rotate(-24deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(32px, -72%) scale(0.48) rotate(-88deg);
+  }
+}
+
+@keyframes sparkle-layer {
+  0% {
+    opacity: 0;
+  }
+  8%,
+  78% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes sparkle-burst {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0) rotate(var(--rot, 0deg));
+  }
+  18% {
+    opacity: 1;
+    transform: translate(calc(-50% + (var(--tx) * 0.55)), calc(-50% + (var(--ty) * 0.55))) scale(1.18) rotate(calc(var(--rot, 0deg) + 34deg));
+  }
+  55% {
+    opacity: 1;
+    transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty))) scale(0.92) rotate(calc(var(--rot, 0deg) + 78deg));
+  }
+  100% {
+    opacity: 0;
+    transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty) - 12px)) scale(0.38) rotate(calc(var(--rot, 0deg) + 132deg));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .recipe-board-list {
+    transition: none !important;
+  }
+
+  .sparkles.show {
+    animation-duration: 0.8s;
+  }
+
+  .sparkles.show span {
+    animation-name: sparkle-fade;
+    animation-duration: 0.8s;
+  }
+
+  .pot-wrap.celebrate .pot {
+    animation: none;
+  }
+
+  .feedback.good {
+    animation: feedback-yum-fade 0.8s ease both;
+  }
+
+  .feedback.good::before,
+  .feedback.good::after {
+    animation: none;
+    opacity: 0;
+  }
+}
+
+@keyframes sparkle-fade {
+  0%,
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.82) rotate(var(--rot, 0deg));
+  }
+  35%,
+  70% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1) rotate(var(--rot, 0deg));
+  }
+}
+
+@keyframes feedback-yum-fade {
+  0% {
+    opacity: 0;
+  }
+  35%,
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes sold-out-drop {
+  0% {
+    opacity: 0;
+    transform: translateY(-36px) rotate(-11deg) scale(0.9);
+  }
+  42% {
+    opacity: 1;
+    transform: translateY(2px) rotate(7deg) scale(1);
+  }
+  62% {
+    transform: translateY(0) rotate(-5deg);
+  }
+  80% {
+    transform: translateY(0) rotate(3deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) rotate(0deg) scale(1);
+  }
+}
+
+@keyframes sold-out-pull-up {
+  0% {
+    opacity: 1;
+    transform: translateY(0) rotate(0deg) scale(1);
+  }
+  35% {
+    transform: translateY(-4px) rotate(4deg) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-42px) rotate(-8deg) scale(0.92);
+  }
+}
+
+@keyframes ingredient-pop {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, calc(-50% + 8px)) scale(0.84) rotate(var(--tilt));
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1) rotate(var(--tilt));
+  }
+}
+
+@keyframes ingredient-exit {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1) rotate(var(--tilt));
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, calc(-50% + 12px)) scale(0.9) rotate(var(--tilt));
+  }
+}
+
+@keyframes ingredient-glow {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 rgba(255, 231, 154, 0),
+      0 2px 7px rgba(91, 59, 69, 0.08);
+  }
+  50% {
+    box-shadow:
+      0 0 16px rgba(255, 231, 154, 0.85),
+      0 2px 7px rgba(91, 59, 69, 0.08);
+  }
+}
+
+@keyframes ladle-stir {
+  0%,
+  100% {
+    transform: rotate(8deg);
+  }
+  18% {
+    transform: translate(-5px, 4px) rotate(-2deg);
+  }
+  38% {
+    transform: translate(6px, -1px) rotate(16deg);
+  }
+  58% {
+    transform: translate(-4px, 3px) rotate(1deg);
+  }
+  78% {
+    transform: translate(4px, 0) rotate(13deg);
+  }
+}
+
+@keyframes ladle-empty-wiggle {
+  0%,
+  100% {
+    transform: rotate(8deg);
+  }
+  25% {
+    transform: translateX(-4px) rotate(3deg);
+  }
+  50% {
+    transform: translateX(4px) rotate(13deg);
+  }
+  75% {
+    transform: translateX(-2px) rotate(5deg);
+  }
+}
+
+@keyframes ingredient-swirl {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) rotate(var(--tilt));
+  }
+  28% {
+    transform: translate(calc(-50% + var(--swirl-x)), calc(-50% + var(--swirl-y))) rotate(calc(var(--tilt) + 18deg));
+  }
+  58% {
+    transform: translate(calc(-50% - var(--swirl-y)), calc(-50% + var(--swirl-x))) rotate(calc(var(--tilt) - 14deg));
+  }
+}
+
+@keyframes steak-gentle-wiggle {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) rotate(var(--tilt));
+  }
+  35% {
+    transform: translate(calc(-50% + 4px), calc(-50% - 2px)) rotate(calc(var(--tilt) + 3deg));
+  }
+  70% {
+    transform: translate(calc(-50% - 3px), calc(-50% + 3px)) rotate(calc(var(--tilt) - 3deg));
+  }
+}
+
+@keyframes mobile-steak-wiggle {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) rotate(var(--tilt));
+  }
+  34% {
+    transform: translate(calc(-50% + 4px), calc(-50% - 2px)) rotate(calc(var(--tilt) + 3deg));
+  }
+  68% {
+    transform: translate(calc(-50% - 3px), calc(-50% + 3px)) rotate(calc(var(--tilt) - 3deg));
+  }
+}
+
+@keyframes seafood-fish-stir {
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(var(--seafood-rotate));
+  }
+  30% {
+    transform: translate(4px, 2px) rotate(calc(var(--seafood-rotate) + 5deg));
+  }
+  62% {
+    transform: translate(-3px, -1px) rotate(calc(var(--seafood-rotate) - 4deg));
+  }
+}
+
+@keyframes seafood-shrimp-stir {
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(var(--seafood-rotate));
+  }
+  32% {
+    transform: translate(3px, 4px) rotate(calc(var(--seafood-rotate) - 5deg));
+  }
+  64% {
+    transform: translate(-2px, 1px) rotate(calc(var(--seafood-rotate) + 4deg));
+  }
+}
+
+@keyframes seafood-shrimp-stir-alt {
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(var(--seafood-rotate));
+  }
+  34% {
+    transform: translate(-3px, 3px) rotate(calc(var(--seafood-rotate) + 4deg));
+  }
+  68% {
+    transform: translate(2px, -2px) rotate(calc(var(--seafood-rotate) - 5deg));
+  }
+}
+
+@keyframes mobile-seafood-shrimp-stir {
+  0%,
+  100% {
+    transform: translate(-15px, -10px) rotate(var(--seafood-rotate));
+  }
+  32% {
+    transform: translate(-12px, -8px) rotate(calc(var(--seafood-rotate) - 3deg));
+  }
+  64% {
+    transform: translate(-17px, -11px) rotate(calc(var(--seafood-rotate) + 3deg));
+  }
+}
+
+@keyframes mobile-seafood-shrimp-stir-alt {
+  0%,
+  100% {
+    transform: translate(-30px, -10px) rotate(var(--seafood-rotate));
+  }
+  34% {
+    transform: translate(-33px, -8px) rotate(calc(var(--seafood-rotate) + 3deg));
+  }
+  68% {
+    transform: translate(-28px, -12px) rotate(calc(var(--seafood-rotate) - 3deg));
+  }
+}
+
+@keyframes tofu-stir {
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(var(--tofu-rotate));
+  }
+  35% {
+    transform: translate(3px, 2px) rotate(calc(var(--tofu-rotate) + 4deg));
+  }
+  68% {
+    transform: translate(-2px, -1px) rotate(calc(var(--tofu-rotate) - 3deg));
+  }
+}
+
+@keyframes tofu-stir-alt {
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(var(--tofu-rotate));
+  }
+  32% {
+    transform: translate(-2px, 3px) rotate(calc(var(--tofu-rotate) - 4deg));
+  }
+  66% {
+    transform: translate(2px, -2px) rotate(calc(var(--tofu-rotate) + 3deg));
+  }
+}
+
+@keyframes pepper-sprinkle {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, calc(-50% - 10px)) scale(calc(var(--flake-scale, 1) * 0.8)) rotate(var(--flake-rotate, 0deg));
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(var(--flake-scale, 1)) rotate(var(--flake-rotate, 0deg));
+  }
+}
+
+@keyframes cheese-sprinkle {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, calc(-50% - 12px)) rotate(var(--shred-rotate, 0deg)) scale(calc(var(--shred-scale, 1) * 0.82));
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) rotate(var(--shred-rotate, 0deg)) scale(var(--shred-scale, 1));
+  }
+}
+
+@keyframes pepper-stir {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) rotate(var(--flake-rotate, 0deg)) scale(var(--flake-scale, 1));
+  }
+  36% {
+    transform: translate(calc(-50% + 2px), calc(-50% + 2px)) rotate(calc(var(--flake-rotate, 0deg) + 10deg)) scale(var(--flake-scale, 1));
+  }
+  68% {
+    transform: translate(calc(-50% - 2px), -50%) rotate(calc(var(--flake-rotate, 0deg) - 8deg)) scale(var(--flake-scale, 1));
+  }
+}
+
+@keyframes cheese-stir {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) rotate(var(--shred-rotate, 0deg)) scale(var(--shred-scale, 1));
+  }
+  36% {
+    transform: translate(calc(-50% + 2px), calc(-50% + 1px)) rotate(calc(var(--shred-rotate, 0deg) + 8deg)) scale(var(--shred-scale, 1));
+  }
+  68% {
+    transform: translate(calc(-50% - 2px), calc(-50% + 2px)) rotate(calc(var(--shred-rotate, 0deg) - 7deg)) scale(var(--shred-scale, 1));
+  }
+}
+
+@keyframes noodle-swirl {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  35% {
+    transform: translate(10px, 3px);
+  }
+  68% {
+    transform: translate(-7px, 1px);
+  }
+}
+
+@keyframes wobble {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-3deg);
+  }
+  50% {
+    transform: rotate(3deg);
+  }
+  75% {
+    transform: rotate(-2deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pot-body,
+  .pot-body::after {
+    transition-duration: 1ms;
+  }
+}
+
+@media (max-width: 760px) {
+  body {
+    overflow-x: hidden;
+  }
+
+  .app-shell {
+    width: min(100% - 16px, 640px);
+    padding-top: 14px;
+  }
+
+  .workbench,
+  .ingredient-section {
+    border-radius: 24px;
+  }
+
+  .workbench {
+    padding: 12px 12px 22px;
+  }
+
+  .app-header {
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+
+  h1 {
+    font-size: clamp(1.38rem, 7vw, 1.72rem);
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  .root-badge {
+    width: 66px;
+    height: 66px;
+    min-width: 66px;
+    min-height: 66px;
+    padding: 8px;
+    border-radius: 17px;
+  }
+
+  .root-badge strong {
+    width: 48px;
+    height: 29px;
+    font-size: 1.48rem;
+  }
+
+  .root-badge > span {
+    font-size: 0.64rem;
+  }
+
+  .root-badge em {
+    height: 13px;
+    font-size: 0.52rem;
+  }
+
+  .root-note-content {
+    transform: translateY(4px);
+  }
+
+  .root-note-content[data-has-accidental="true"] {
+    transform: translate(-0.02em, 4px);
+  }
+
+  .root-menu {
+    position: fixed;
+    top: 82px;
+    left: auto;
+    right: 16px;
+    width: min(238px, calc(100vw - 48px));
+    max-width: calc(100vw - 48px);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 5px;
+    padding: 8px;
+    transform: none;
+    transform-origin: top right;
+    animation: mobile-root-menu-pop 0.18s ease both;
+  }
+
+  .root-option {
+    min-height: 30px;
+    padding-inline: 3px;
+    border-radius: 10px;
+    font-size: 0.7rem;
+  }
+
+  .root-option[data-root-value="random"] {
+    grid-column: span 3;
+  }
+
+  .kitchen-stage {
+    grid-template-columns: 1fr;
+    min-height: 226px;
+    padding: 2px 0 0;
+  }
+
+  .pot-wrap {
+    grid-column: 1;
+    width: min(560px, 112%);
+    height: 216px;
+    aspect-ratio: auto;
+    transform: scale(0.78);
+    transform-origin: top center;
+  }
+
+  .pot {
+    inset: 62px 0 0;
+  }
+
+  .pot-rim {
+    height: 68px;
+  }
+
+  .pot-body {
+    top: 34px;
+    height: 126px;
+    border-radius: 32px 32px 68px 68px;
+  }
+
+  .pot-body::before {
+    inset: 27px 25px auto;
+    height: 15px;
+  }
+
+  .handle {
+    top: 77px;
+    width: 54px;
+    height: 42px;
+  }
+
+  .pot-face {
+    bottom: 26px;
+  }
+
+  .pot-ingredients {
+    top: 5px;
+    height: 82px;
+  }
+
+  .noodle-layer {
+    top: 60px;
+    height: 54px;
+  }
+
+  .pot-ingredient-chip[data-food="steak-bite"] {
+    --pot-chip-y-offset: -28px;
+  }
+
+  .pot-ingredient-chip[data-food="tofu"] {
+    --pot-chip-y-offset: -20px;
+  }
+
+  .pot-wrap.stirring .pot-ingredient-chip[data-food="steak-bite"]:not(.exiting) {
+    animation: mobile-steak-wiggle 720ms ease-in-out both;
+  }
+
+  .seafood-fish {
+    left: calc(46.5% - 12px);
+    top: calc(20% - 25px);
+  }
+
+  .seafood-shrimp {
+    width: 20.15%;
+    height: 50.7%;
+    transform: translate(-20px, -10px) rotate(var(--seafood-rotate));
+  }
+
+  .seafood-shrimp-1 {
+    transform: translate(-15px, -10px) rotate(var(--seafood-rotate));
+  }
+
+  .seafood-shrimp-2 {
+    transform: translate(-30px, -10px) rotate(var(--seafood-rotate));
+  }
+
+  .pot-wrap.stirring .seafood-shrimp-1 {
+    animation-name: mobile-seafood-shrimp-stir;
+  }
+
+  .pot-wrap.stirring .seafood-shrimp-2 {
+    animation-name: mobile-seafood-shrimp-stir-alt;
+  }
+
+  .ladle {
+    right: 4px;
+    top: -48px;
+    width: 178px;
+    height: 180px;
+  }
+
+  .recipe-board {
+    width: 100%;
+    max-height: none;
+    padding: 9px 9px 10px;
+    margin: 0 0 3px;
+    overflow-x: hidden;
+    overflow-y: visible;
+  }
+
+  .recipe-board-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    position: relative;
+    margin-bottom: 6px;
+    font-size: 0.58rem;
+    cursor: pointer;
+  }
+
+  .recipe-board-toggle em {
+    position: absolute;
+    right: max(8px, calc(50% - 158px));
+    display: inline-flex;
+    align-items: center;
+    min-height: 18px;
+    padding: 2px 6px;
+    border-radius: 999px;
+    background: rgba(255, 250, 240, 0.16);
+    color: rgba(255, 250, 240, 0.9);
+    font-size: 0.48rem;
+    letter-spacing: 0.03em;
+  }
+
+  .recipe-board-toggle em::after {
+    content: "⌃";
+    margin-left: 3px;
+    font-size: 0.56rem;
+    line-height: 1;
+    transform: translateY(1px);
+  }
+
+  .recipe-board[data-collapsed="true"] {
+    padding-block: 8px 9px;
+  }
+
+  .recipe-board[data-collapsed="true"] .recipe-board-list {
+    max-height: 0;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-8px);
+  }
+
+  .recipe-board[data-collapsed="true"] .recipe-board-toggle {
+    margin-bottom: 0;
+  }
+
+  .recipe-board[data-collapsed="true"] .recipe-board-toggle em::after {
+    content: "⌄";
+  }
+
+  .recipe-board[data-collapsed="true"] .recipe-board-toggle em::after {
+    transform: translateY(-4px);
+  }
+
+  .recipe-board-item strong {
+    font-size: 0.57rem;
+  }
+
+  .recipe-ingredient {
+    gap: 2px;
+    padding: 1px 4px;
+    font-size: 0.45rem;
+  }
+
+  .recipe-ingredient::before {
+    width: 5px;
+    height: 5px;
+  }
+
+  .recipe-board-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 5px;
+    max-height: 360px;
+    overflow: hidden;
+    opacity: 1;
+    transform: translateY(0);
+    transform-origin: top;
+    transition:
+      max-height 320ms ease,
+      opacity 240ms ease,
+      transform 280ms ease;
+  }
+
+  .recipe-board-item {
+    gap: 3px;
+    min-height: 58px;
+    padding: 5px;
+    border-radius: 8px;
+  }
+
+  .ingredient-grid {
+    display: grid;
+    grid-auto-flow: row;
+    grid-auto-columns: auto;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 4px;
+    align-items: start;
+    overflow: visible;
+    padding: 0;
+  }
+
+  .controls {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 6px;
+    width: 100%;
+    margin: -20px 0 3px;
+    padding-bottom: 8px;
+    overflow: visible;
+  }
+
+  .primary-button,
+  .secondary-button {
+    width: 100%;
+    min-height: 44px;
+    padding-inline: 8px;
+    font-size: 0.84rem;
+  }
+
+  #playButton,
+  #submitButton,
+  #nextButton {
+    grid-column: span 1;
+    justify-self: stretch;
+  }
+
+  #submitButton {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .serve-button {
+    min-width: 0;
+    min-height: 58px;
+    padding-inline: 10px;
+    overflow: visible;
+  }
+
+  .serve-button::after {
+    left: 32%;
+    right: 32%;
+  }
+
+  .ladle-hint {
+    margin: -3px 0 0;
+    font-size: 0.8rem;
+  }
+
+  .ingredient-section {
+    padding: clamp(9px, 2.5vw, 12px) clamp(5px, 1.6vw, 8px) clamp(10px, 2.6vw, 14px);
+    overflow-x: hidden;
+  }
+
+  .ingredient-heading {
+    margin-bottom: 10px;
+  }
+
+  .ingredient-group {
+    width: 100%;
+    min-width: 0;
+    gap: 3px;
+    padding: 3px;
+    border-radius: 10px;
+  }
+
+  .ingredient-group h3 {
+    padding: 3px 2px;
+    border-radius: 8px;
+    font-size: clamp(0.38rem, 1.65vw, 0.5rem);
+    letter-spacing: 0.015em;
+  }
+
+  .ingredient-group-list {
+    gap: 3px;
+  }
+
+  .ingredient-card {
+    width: 100%;
+    min-width: 0;
+    grid-template-columns: clamp(19px, 5.3vw, 23px) minmax(0, 1fr);
+    grid-template-areas:
+      "mark name"
+      "mark theory";
+    align-items: center;
+    justify-items: start;
+    gap: 1px 3px;
+    min-height: clamp(42px, 11.5vw, 52px);
+    padding: 3px;
+    border-radius: 9px;
+  }
+
+  .food-mark {
+    width: clamp(19px, 5.3vw, 23px);
+    height: clamp(19px, 5.3vw, 23px);
+    justify-self: center;
+    align-self: center;
+    transform: scale(0.44);
+    transform-origin: center;
+  }
+
+  .ingredient-card .food-mark span {
+    left: 50%;
+    top: 50%;
+    transform-origin: center;
+    transform: translate(-50%, -50%);
+  }
+
+  .ingredient-card[data-food="base"] .food-mark span {
+    transform: translate(calc(-50% + 2px), -50%);
+  }
+
+  .ingredient-card[data-food="springy-noodle"] .food-mark span,
+  .ingredient-card[data-food="soft-noodles"] .food-mark span {
+    transform: translate(calc(-50% + 12px), calc(-50% + 8px));
+  }
+
+  .ingredient-card[data-food="steak-bite"] .food-mark span,
+  .ingredient-card[data-food="seafood-bite"] .food-mark span,
+  .ingredient-card[data-food="cheese"] .food-mark span {
+    transform: translate(calc(-50% + 12px), calc(-50% + 4px));
+  }
+
+  .ingredient-card[data-food="seafood-bite"] .food-mark span {
+    transform: translate(calc(-50% + 16px), calc(-50% + 6px));
+  }
+
+  .ingredient-card[data-food="tofu"] .food-mark span {
+    transform: translate(calc(-50% + 12px), calc(-50% + 8px)) scale(0.62);
+  }
+
+  .ingredient-card[data-food="spicy-peppers"] .food-mark span {
+    transform: translate(calc(-50% + 12px), calc(-50% + 8px)) scale(0.68);
+  }
+
+  .ingredient-name {
+    min-width: 0;
+    font-size: clamp(0.46rem, 1.9vw, 0.58rem);
+    line-height: 1.06;
+    overflow-wrap: anywhere;
+  }
+
+  .ingredient-theory {
+    min-width: 0;
+    font-size: clamp(0.36rem, 1.5vw, 0.46rem);
+    line-height: 1.08;
+    overflow-wrap: anywhere;
+  }
+
+  .ingredient-card[data-unavailable="true"]:disabled::after {
+    width: min(92%, 74px);
+    padding: 3px 4px;
+    font-size: clamp(0.3rem, 1.2vw, 0.38rem);
+    line-height: 1.08;
+  }
+}
+
+@media (max-width: 430px) {
+  .app-header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+  }
+
+  #roundPrompt {
+    font-size: 0.78rem;
+    white-space: nowrap;
+  }
+
+  .ladle {
+    right: -2px;
+    top: -38px;
+    width: 142px;
+    height: 144px;
+  }
+
+  .recipe-board-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .recipe-board-item {
+    min-height: 60px;
+  }
+
+  .ingredient-heading {
+    display: flex;
+    align-items: center;
+  }
+
+  .utility-button {
+    width: auto;
+    min-height: 40px;
+    padding-inline: 12px;
+    font-size: 0.82rem;
+  }
+}
