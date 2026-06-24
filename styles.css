@@ -1304,6 +1304,13 @@ h2 {
   color: #9a4469;
 }
 
+.sharp-symbol {
+  display: inline-block;
+  margin-left: 0.02em;
+  line-height: 1;
+  transform: translateY(-0.09em);
+}
+
 .feedback.good::before,
 .feedback.good::after {
   content: "";

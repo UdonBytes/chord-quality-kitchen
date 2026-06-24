@@ -188,6 +188,20 @@ function displayNoteName(note) {
   return note.replace(/b/g, "♭").replace(/#/g, "♯");
 }
 
+function escapeHtml(value) {
+  return String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+function displayNoteNameHtml(note) {
+  const display = displayNoteName(note);
+  return escapeHtml(display).replace(/♯/g, '<span class="sharp-symbol">♯</span>');
+}
+
 function renderNoteLabel(element, note) {
   const display = displayNoteName(note);
   const match = display.match(/^([A-G])([♭♯]*)$/);
@@ -1063,7 +1077,7 @@ function submitAnswer() {
   els.recipe.innerHTML = "";
 
   if (correct) {
-    els.feedback.textContent = formatCorrectFeedback();
+    els.feedback.innerHTML = formatCorrectFeedbackHtml();
     els.feedback.className = "feedback good";
     els.potWrap.classList.add("celebrate");
     els.sparkles.classList.add("show");
@@ -1074,11 +1088,11 @@ function submitAnswer() {
   }
 }
 
-function formatCorrectFeedback() {
+function formatCorrectFeedbackHtml() {
   const { root, quality, notes } = state.current;
   const article = usesAnArticle(root) ? "an" : "a";
-  const noteNames = notes.map((note) => displayNoteName(note.spelling)).join(" ");
-  return `Yum! That's ${article} ${displayNoteName(root)} ${quality.display} (${noteNames}).`;
+  const noteNames = notes.map((note) => displayNoteNameHtml(note.spelling)).join(" ");
+  return `Yum! That's ${article} ${displayNoteNameHtml(root)} ${escapeHtml(quality.display)} (${noteNames}).`;
 }
 
 function usesAnArticle(root) {
