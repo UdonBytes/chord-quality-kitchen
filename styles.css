@@ -1870,6 +1870,164 @@ footer {
   font-size: 0.92rem;
 }
 
+@media (min-width: 761px) {
+  .app-shell {
+    padding: 14px 0 8px;
+  }
+
+  .app-header {
+    margin-bottom: 10px;
+  }
+
+  .workbench {
+    padding: 14px 22px 18px;
+  }
+
+  .status-panel {
+    bottom: 0;
+  }
+
+  .recipe-board {
+    margin: 2px 0 2px;
+    padding: 10px 13px 11px;
+  }
+
+  .recipe-board-toggle {
+    margin-bottom: 4px;
+  }
+
+  .recipe-board-list {
+    gap: 5px;
+  }
+
+  .recipe-board-item {
+    gap: 4px;
+    padding: 6px 7px;
+  }
+
+  .recipe-ingredient {
+    padding: 1px 4px;
+    font-size: 0.52rem;
+  }
+
+  .kitchen-stage {
+    min-height: 286px;
+  }
+
+  .pot-wrap {
+    width: min(600px, 100%);
+    top: -10px;
+  }
+
+  .controls {
+    gap: 9px;
+    margin: 5px 0 4px;
+  }
+
+  .primary-button,
+  .secondary-button {
+    min-height: 40px;
+    padding-inline: 18px;
+    border-radius: 15px;
+  }
+
+  .serve-button {
+    min-width: 100px;
+    min-height: 48px;
+    padding: 3px 20px 7px;
+  }
+
+  .serve-button::before {
+    height: 36px;
+    border-top-width: 4px;
+  }
+
+  .serve-button::after {
+    bottom: 2px;
+    height: 7px;
+  }
+
+  .ladle-hint {
+    margin: 1px 0 2px;
+  }
+
+  .ingredient-section {
+    margin-top: 10px;
+    padding: 14px;
+  }
+
+  .ingredient-heading {
+    margin-bottom: 9px;
+  }
+
+  .ingredient-grid {
+    gap: 8px;
+  }
+
+  .ingredient-group {
+    gap: 7px;
+    padding: 8px;
+    border-radius: 15px;
+  }
+
+  .ingredient-group h3 {
+    padding: 5px 8px;
+    border-radius: 10px;
+    font-size: 0.78rem;
+  }
+
+  .ingredient-group-list {
+    gap: 7px;
+  }
+
+  .ingredient-card {
+    grid-template-columns: 38px minmax(0, 1fr);
+    gap: 4px 7px;
+    min-height: 78px;
+    padding: 8px 9px;
+    border-radius: 15px;
+  }
+
+  .ingredient-name,
+  .ingredient-theory {
+    transform: translateX(10px);
+  }
+
+  .ingredient-name {
+    font-size: 1.1rem;
+  }
+
+  .ingredient-theory {
+    font-size: 0.79rem;
+  }
+
+  .food-mark {
+    width: 42px;
+    height: 42px;
+  }
+
+  .ingredient-card[data-food="tofu"] .food-mark span,
+  .ingredient-card[data-food="cheese"] .food-mark span,
+  .ingredient-card[data-food="spicy-peppers"] .food-mark span {
+    transform: scale(0.9);
+  }
+
+  .ingredient-card[data-food="tofu"] .food-mark span {
+    transform: scale(0.8);
+  }
+
+  .utility-button {
+    min-height: 36px;
+    padding-inline: 12px;
+    border-radius: 12px;
+  }
+
+  footer {
+    padding: 6px 16px 10px;
+    font-size: 0.84rem;
+  }
+}
+
 @keyframes drift {
   0%,
   100% {
