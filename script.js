@@ -4,6 +4,7 @@ const ROOT_MENU_OPTIONS = ["random", ...ROOTS];
 const LETTERS = ["C", "D", "E", "F", "G", "A", "B"];
 const NATURAL_PITCH = { C: 0, D: 2, E: 4, F: 5, G: 7, A: 9, B: 11 };
 const FLAT_SAMPLE_NAMES = ["C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb", "B"];
+const SHARP_DISPLAY_NAMES = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
 
 const INGREDIENTS = [
   { id: "root", label: "Soup Base", theory: "Root", role: "Broth", group: "broth", color: "#ffe79a", vessel: "bowl", food: "base" },
@@ -102,6 +103,7 @@ const state = {
   sampleErrors: [],
   preloadPromise: null,
   noodleFadeTimer: null,
+  potSadTimer: null,
   potChipSequence: 0,
   exitingPotIngredients: new Set(),
   exitPotTimers: new Map(),
@@ -146,12 +148,12 @@ function rootPitchClass(root) {
   return pitchClass(ROOT_MIDIS[root]);
 }
 
-function spellNote(root, intervalId) {
+function spellNote(root, intervalId, rootMidi = ROOT_MIDIS[root]) {
   const interval = INTERVALS[intervalId];
   const rootLetter = root[0];
   const rootLetterIndex = LETTERS.indexOf(rootLetter);
   const targetLetter = LETTERS[(rootLetterIndex + interval.degree) % LETTERS.length];
-  const targetPitch = pitchClass(rootPitchClass(root) + interval.semitones);
+  const targetPitch = pitchClass(rootMidi + interval.semitones);
   const naturalPitch = NATURAL_PITCH[targetLetter];
   let accidental = targetPitch - naturalPitch;
 
@@ -167,11 +169,27 @@ function spellNote(root, intervalId) {
 }
 
 function getChordNotes(root, quality) {
+  const rootMidi = ROOT_MIDIS[root];
+  const defaultNotes = quality.recipe.map((ingredientId) => ({
+    ingredientId,
+    spelling: spellNote(root, ingredientId, rootMidi),
+    midi: rootMidi + INTERVALS[ingredientId].semitones
+  }));
+
+  if (quality.id !== "diminished7" || !defaultNotes.some((note) => note.spelling.includes("bb"))) {
+    return defaultNotes;
+  }
+
   return quality.recipe.map((ingredientId) => ({
     ingredientId,
-    spelling: spellNote(root, ingredientId),
-    midi: ROOT_MIDIS[root] + INTERVALS[ingredientId].semitones
+    spelling: SHARP_DISPLAY_NAMES[pitchClass(rootMidi + INTERVALS[ingredientId].semitones)],
+    midi: rootMidi + INTERVALS[ingredientId].semitones
   }));
+}
+
+function getChordDisplayRoot(root, quality) {
+  const notes = getChordNotes(root, quality);
+  return quality.id === "diminished7" && notes[0]?.spelling ? notes[0].spelling : root;
 }
 
 function sampleNameForMidi(midi) {
@@ -233,12 +251,13 @@ function chooseRound() {
     qualityPool.push(...getAvailableQualities());
   }
   const quality = qualityPool[Math.floor(Math.random() * qualityPool.length)];
-  state.current = { root, quality, notes: getChordNotes(root, quality) };
+  const notes = getChordNotes(root, quality);
+  state.current = { root, displayRoot: getChordDisplayRoot(root, quality), quality, notes };
   state.selected.clear();
   state.orderServed = false;
   clearPotIngredientExits();
   els.potIngredients.innerHTML = "";
-  renderNoteLabel(els.rootNote, root);
+  renderNoteLabel(els.rootNote, state.current.displayRoot);
   renderRootSelector();
   if (els.roundPrompt) {
     els.roundPrompt.textContent = "Listen to the chord. Tap ingredients to hear their sound and add them to the pot, then mix!";
@@ -260,7 +279,7 @@ function renderRootSelector() {
   els.rootBadge.setAttribute("aria-expanded", String(state.rootMenuOpen));
   els.rootBadge.setAttribute(
     "aria-label",
-    `Root ${displayNoteName(state.current?.root || "C")}. ${state.rootMode === "random" ? "Random root" : "Locked root"}. Click to choose a root. Double click to ${state.rootMode === "random" ? "lock current root" : "unlock root"}.`
+    `Root ${displayNoteName(state.current?.displayRoot || state.current?.root || "C")}. ${state.rootMode === "random" ? "Random root" : "Locked root"}. Click to choose a root. Double click to ${state.rootMode === "random" ? "lock current root" : "unlock root"}.`
   );
 
   els.rootMenu.hidden = !state.rootMenuOpen;
@@ -1085,14 +1104,25 @@ function submitAnswer() {
     els.feedback.textContent = "Something tastes off - check the 3rd, 5th, or 7th.";
     els.feedback.className = "feedback bad";
     els.potWrap.classList.add("wobble");
+    showPotFrown();
   }
+}
+
+function showPotFrown() {
+  window.clearTimeout(state.potSadTimer);
+  els.potWrap.classList.add("sad");
+  state.potSadTimer = window.setTimeout(() => {
+    els.potWrap.classList.remove("sad");
+    state.potSadTimer = null;
+  }, 2000);
 }
 
 function formatCorrectFeedbackHtml() {
   const { root, quality, notes } = state.current;
-  const article = usesAnArticle(root) ? "an" : "a";
+  const displayRoot = state.current.displayRoot || root;
+  const article = usesAnArticle(displayRoot) ? "an" : "a";
   const noteNames = notes.map((note) => displayNoteNameHtml(note.spelling)).join(" ");
-  return `Yum! That's ${article} ${displayNoteNameHtml(root)} ${escapeHtml(quality.display)} (${noteNames}).`;
+  return `Yum! That's ${article} ${displayNoteNameHtml(displayRoot)} ${escapeHtml(quality.display)} (${noteNames}).`;
 }
 
 function usesAnArticle(root) {
@@ -1112,7 +1142,9 @@ function isSubset(a, b) {
 }
 
 function clearAnimations() {
-  els.potWrap.classList.remove("celebrate", "wobble", "stirring", "empty-stir");
+  window.clearTimeout(state.potSadTimer);
+  state.potSadTimer = null;
+  els.potWrap.classList.remove("celebrate", "wobble", "stirring", "empty-stir", "sad");
   els.sparkles.classList.remove("show");
   void els.potWrap.offsetWidth;
 }

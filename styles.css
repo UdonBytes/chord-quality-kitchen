@@ -693,6 +693,16 @@ h2 {
   height: 18px;
   border-bottom: 5px solid var(--ink);
   border-radius: 0 0 999px 999px;
+  transition:
+    border-color 160ms ease,
+    transform 160ms ease;
+}
+
+.pot-wrap.sad .smile {
+  border-bottom: 0;
+  border-top: 5px solid var(--ink);
+  border-radius: 999px 999px 0 0;
+  transform: translateY(8px);
 }
 
 .bubbles span,
@@ -2541,6 +2551,22 @@ footer {
   }
 }
 
+@keyframes mobile-pot-wobble {
+  0%,
+  100% {
+    transform: scale(0.78) rotate(0deg);
+  }
+  25% {
+    transform: scale(0.78) rotate(-3deg);
+  }
+  50% {
+    transform: scale(0.78) rotate(3deg);
+  }
+  75% {
+    transform: scale(0.78) rotate(-2deg);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .pot-body,
   .pot-body::after {
@@ -2656,6 +2682,10 @@ footer {
     aspect-ratio: auto;
     transform: scale(0.78);
     transform-origin: top center;
+  }
+
+  .pot-wrap.wobble {
+    animation-name: mobile-pot-wobble;
   }
 
   .pot {
