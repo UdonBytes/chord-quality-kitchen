@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=20260624-mobile-feedback-small">
+    <link rel="stylesheet" href="styles.css?v=20260624-phone-loading-8px-up11">
   </head>
   <body>
     <main class="app-shell">
@@ -75,6 +75,7 @@
               <button class="ladle" id="ladleButton" type="button" aria-label="Try my soup"></button>
             </div>
           </div>
+          <button id="howToPlayButton" class="how-to-play-button" type="button">How to Play</button>
         </div>
 
         <div class="controls" aria-label="Playback and answer controls">
@@ -95,8 +96,26 @@
       </section>
     </main>
 
+    <div id="howToPlayModal" class="instruction-modal" hidden>
+      <div class="instruction-modal-backdrop" data-how-to-play-close></div>
+      <section class="instruction-dialog" role="dialog" aria-modal="true" aria-labelledby="howToPlayTitle">
+        <button class="instruction-close" type="button" aria-label="Close How to Play" data-how-to-play-close>&times;</button>
+        <h2 id="howToPlayTitle">How to Play</h2>
+        <p>Listen to the order, then build the soup by choosing ingredients.</p>
+        <ol>
+          <li>Tap <span class="instruction-term instruction-term-hear">Hear Order</span> to listen to the mystery chord.</li>
+          <li>Tap ingredients to hear their sound and add them to the pot.</li>
+          <li>Click the ladle to hear your soup.</li>
+          <li>When you think it matches, tap <span class="instruction-term instruction-term-serve">Serve</span>.</li>
+          <li>Tap <span class="instruction-term instruction-term-next">Next Order</span> for a new one.</li>
+        </ol>
+        <p>Use the Soup Recipe Board to see which ingredients belong in each recipe. Tap a recipe to mark it <span class="instruction-term instruction-term-sold-out">Sold Out</span> if you do not want it tested.</p>
+        <button id="howToPlayGotIt" class="instruction-got-it" type="button">Got it!</button>
+      </section>
+    </div>
+
     <footer>Created by Jane Hong (UdonBytes)</footer>
 
-    <script src="script.js?v=20260624-mobile-feedback-small"></script>
+    <script src="script.js?v=20260624-phone-how-to-play-tab"></script>
   </body>
 </html>

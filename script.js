@@ -70,6 +70,7 @@ const CHORD_QUALITIES = [
 
 const QUALITY_IDS = CHORD_QUALITIES.map((quality) => quality.id);
 const QUALITY_STORAGE_KEY = "cqk-enabled-qualities";
+const HOW_TO_PLAY_STORAGE_KEY = "cqk-how-to-play-dismissed";
 const SOLD_OUT_PATH_MESSAGE = "This soup is sold out now - reset or choose another ingredient.";
 const MOBILE_RECIPE_BOARD_QUERY = "(max-width: 760px)";
 
@@ -137,7 +138,10 @@ const els = {
   feedback: document.querySelector("#feedback"),
   recipe: document.querySelector("#recipe"),
   potWrap: document.querySelector("#potWrap"),
-  sparkles: document.querySelector("#sparkles")
+  sparkles: document.querySelector("#sparkles"),
+  howToPlayButton: document.querySelector("#howToPlayButton"),
+  howToPlayModal: document.querySelector("#howToPlayModal"),
+  howToPlayGotIt: document.querySelector("#howToPlayGotIt")
 };
 
 function pitchClass(note) {
@@ -566,6 +570,41 @@ function updateResetButton() {
 
 function updateNextButton() {
   els.nextButton.disabled = !state.orderServed;
+}
+
+function hasDismissedHowToPlay() {
+  try {
+    return localStorage.getItem(getHowToPlayStorageKey()) === "true";
+  } catch (error) {
+    console.warn("Could not read how-to-play preference", error);
+    return false;
+  }
+}
+
+function rememberHowToPlayDismissed() {
+  try {
+    localStorage.setItem(getHowToPlayStorageKey(), "true");
+  } catch (error) {
+    console.warn("Could not save how-to-play preference", error);
+  }
+}
+
+function getHowToPlayStorageKey() {
+  return `${HOW_TO_PLAY_STORAGE_KEY}-${isMobileRecipeBoardLayout() ? "phone" : "desktop"}`;
+}
+
+function openHowToPlay() {
+  els.howToPlayModal.hidden = false;
+  document.body.classList.add("modal-open");
+  els.howToPlayGotIt.focus({ preventScroll: true });
+}
+
+function closeHowToPlay(remember = true) {
+  els.howToPlayModal.hidden = true;
+  document.body.classList.remove("modal-open");
+  if (remember) {
+    rememberHowToPlayDismissed();
+  }
 }
 
 function isMobileRecipeBoardLayout() {
@@ -1165,6 +1204,12 @@ els.nextButton.addEventListener("click", () => {
   chooseRound();
 });
 
+els.howToPlayButton.addEventListener("click", openHowToPlay);
+els.howToPlayGotIt.addEventListener("click", () => closeHowToPlay(true));
+els.howToPlayModal.querySelectorAll("[data-how-to-play-close]").forEach((button) => {
+  button.addEventListener("click", () => closeHowToPlay(true));
+});
+
 els.recipeBoardToggle.addEventListener("click", () => {
   if (!isMobileRecipeBoardLayout()) return;
   state.recipeBoardCollapsed = !state.recipeBoardCollapsed;
@@ -1200,8 +1245,17 @@ document.addEventListener("click", () => {
   }
 });
 
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && !els.howToPlayModal.hidden) {
+    closeHowToPlay(true);
+  }
+});
+
 chooseRound();
 renderRecipeBoard();
+if (!hasDismissedHowToPlay()) {
+  window.setTimeout(openHowToPlay, 250);
+}
 preloadSamples();
 
 window.ChordQualityKitchen = {
