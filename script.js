@@ -9,10 +9,10 @@ const INGREDIENTS = [
   { id: "root", label: "Soup Base", theory: "Root", role: "Broth", group: "broth", color: "#ffe79a", vessel: "bowl", food: "base" },
   { id: "major3", label: "Springy Noodles", theory: "Major 3rd", role: "Noodle", group: "noodle", color: "#ffdccb", vessel: "scoop", food: "springy-noodle" },
   { id: "minor3", label: "Soft Noodles", theory: "Minor 3rd", role: "Noodle", group: "noodle", color: "#f6dfcf", vessel: "scoop", food: "soft-noodles" },
-  { id: "perfect5", label: "Steak", theory: "Perfect 5th", role: "Protein", group: "meat", color: "#f0b990", vessel: "plate", food: "steak-bite" },
+  { id: "perfect5", label: "Meat", theory: "Perfect 5th", role: "Protein", group: "meat", color: "#f0b990", vessel: "plate", food: "steak-bite" },
   { id: "dim5", label: "Seafood", theory: "Diminished 5th", role: "Protein", group: "meat", color: "#ffd9b5", vessel: "plate", food: "seafood-bite" },
   { id: "aug5", label: "Tofu", theory: "Augmented 5th", role: "Protein", group: "meat", color: "#fff0c7", vessel: "plate", food: "tofu" },
-  { id: "minor7", label: "Melty Cheese", theory: "Minor 7th", role: "Topping", group: "topping", color: "#f3b9c8", vessel: "cup", food: "cheese" },
+  { id: "minor7", label: "Spring Onion", theory: "Minor 7th", role: "Topping", group: "topping", color: "#f3b9c8", vessel: "cup", food: "spring-onion" },
   { id: "dim7", label: "Spicy Peppers", theory: "Diminished 7th", role: "Topping", group: "topping", color: "#f9d7df", vessel: "cup", food: "spicy-peppers" }
 ];
 
@@ -494,18 +494,18 @@ function renderPotIngredients() {
           art.appendChild(piece);
         }
       });
-      art.querySelectorAll(".seafood-piece, .tofu-piece, .cheese-shred").forEach((piece) => piece.remove());
-    } else if (ingredient.food === "cheese") {
-      Array.from({ length: 42 }, (_, shredIndex) => `cheese-shred-${shredIndex + 1}`).forEach((className) => {
+      art.querySelectorAll(".seafood-piece, .tofu-piece, .spring-onion-piece").forEach((piece) => piece.remove());
+    } else if (ingredient.food === "spring-onion") {
+      Array.from({ length: 42 }, (_, pieceIndex) => `spring-onion-piece-${pieceIndex + 1}`).forEach((className) => {
         if (!art.querySelector(`.${className}`)) {
           const piece = document.createElement("span");
-          piece.className = `cheese-shred ${className}`;
+          piece.className = `spring-onion-piece ${className}`;
           art.appendChild(piece);
         }
       });
       art.querySelectorAll(".seafood-piece, .tofu-piece, .pepper-flake").forEach((piece) => piece.remove());
     } else {
-      art.querySelectorAll(".seafood-piece, .tofu-piece, .pepper-flake, .cheese-shred").forEach((piece) => piece.remove());
+      art.querySelectorAll(".seafood-piece, .tofu-piece, .pepper-flake, .spring-onion-piece").forEach((piece) => piece.remove());
     }
     chip.classList.toggle("exiting", state.exitingPotIngredients.has(id) && !state.selected.has(id));
     chip.setAttribute("aria-label", ingredient.label);

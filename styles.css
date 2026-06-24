@@ -802,11 +802,11 @@ h2 {
   animation: ladle-empty-wiggle 460ms ease-in-out both;
 }
 
-.pot-wrap.stirring .pot-ingredient-chip:not(.exiting):not([data-food="seafood-bite"]):not([data-food="tofu"]):not([data-food="spicy-peppers"]):not([data-food="cheese"]) {
+.pot-wrap.stirring .pot-ingredient-chip:not(.exiting):not([data-food="seafood-bite"]):not([data-food="tofu"]):not([data-food="spicy-peppers"]):not([data-food="spring-onion"]) {
   animation: ingredient-swirl 820ms ease-in-out both;
 }
 
-.pot-wrap.stirring .pot-ingredient-chip[data-food="steak-bite"]:not(.exiting):not([data-food="seafood-bite"]):not([data-food="tofu"]):not([data-food="spicy-peppers"]):not([data-food="cheese"]) {
+.pot-wrap.stirring .pot-ingredient-chip[data-food="steak-bite"]:not(.exiting):not([data-food="seafood-bite"]):not([data-food="tofu"]):not([data-food="spicy-peppers"]):not([data-food="spring-onion"]) {
   animation: steak-gentle-wiggle 960ms ease-in-out both;
 }
 
@@ -936,81 +936,81 @@ h2 {
   animation: tofu-stir-alt 820ms ease-in-out both;
 }
 
-.pot-ingredient-chip[data-food="cheese"] {
+.pot-ingredient-chip[data-food="spring-onion"] {
   width: 100%;
   height: 100%;
   filter: none;
 }
 
-.pot-ingredient-chip[data-food="cheese"] .pot-food-art {
+.pot-ingredient-chip[data-food="spring-onion"] .pot-food-art {
   background-image: none;
 }
 
-.cheese-shred {
+.spring-onion-piece {
   position: absolute;
   display: block;
   left: var(--x);
   top: var(--y);
-  width: calc(var(--shred-w, 14px) * 1.75);
-  height: calc(var(--shred-h, 4px) * 1.55);
+  width: calc(var(--onion-w, 8px) * 1.45);
+  height: calc(var(--onion-h, 3px) * 1.35);
   border-radius: 999px;
-  background: var(--shred-color, #ffc52e);
-  transform: translate(-50%, -50%) rotate(var(--shred-rotate, 0deg)) scale(var(--shred-scale, 1));
+  background: var(--onion-color, #a9e66f);
+  transform: translate(-50%, -50%) rotate(var(--onion-rotate, 0deg)) scale(var(--onion-scale, 1));
   transform-origin: center;
   box-shadow:
-    0 1px 1px rgba(91, 59, 69, 0.16),
-    inset 0 -1px 0 rgba(189, 117, 12, 0.14);
+    0 1px 1px rgba(91, 59, 69, 0.12),
+    inset 0 -1px 0 rgba(41, 115, 64, 0.14);
 }
 
-.cheese-shred-1 { --x: 7%; --y: 39%; --shred-w: 12px; --shred-h: 4px; --shred-color: #ffd865; --shred-rotate: -18deg; --shred-scale: 0.9; }
-.cheese-shred-2 { --x: 13%; --y: 58%; --shred-w: 15px; --shred-h: 4px; --shred-color: #ffb11f; --shred-rotate: 16deg; --shred-scale: 0.85; }
-.cheese-shred-3 { --x: 19%; --y: 31%; --shred-w: 13px; --shred-h: 5px; --shred-color: #ffe494; --shred-rotate: 42deg; --shred-scale: 0.75; }
-.cheese-shred-4 { --x: 24%; --y: 70%; --shred-w: 16px; --shred-h: 4px; --shred-color: #ffc52e; --shred-rotate: -30deg; --shred-scale: 0.9; }
-.cheese-shred-5 { --x: 30%; --y: 45%; --shred-w: 11px; --shred-h: 4px; --shred-color: #ffd865; --shred-rotate: 8deg; --shred-scale: 0.8; }
-.cheese-shred-6 { --x: 36%; --y: 62%; --shred-w: 17px; --shred-h: 5px; --shred-color: #f6a817; --shred-rotate: 26deg; --shred-scale: 0.82; }
-.cheese-shred-7 { --x: 42%; --y: 27%; --shred-w: 12px; --shred-h: 4px; --shred-color: #ffe494; --shred-rotate: -28deg; --shred-scale: 0.75; }
-.cheese-shred-8 { --x: 48%; --y: 75%; --shred-w: 14px; --shred-h: 4px; --shred-color: #ffbf26; --shred-rotate: 41deg; --shred-scale: 0.86; }
-.cheese-shred-9 { --x: 54%; --y: 42%; --shred-w: 16px; --shred-h: 5px; --shred-color: #ffd45c; --shred-rotate: -9deg; --shred-scale: 0.82; }
-.cheese-shred-10 { --x: 60%; --y: 64%; --shred-w: 11px; --shred-h: 4px; --shred-color: #ffe494; --shred-rotate: -21deg; --shred-scale: 0.75; }
-.cheese-shred-11 { --x: 66%; --y: 34%; --shred-w: 15px; --shred-h: 4px; --shred-color: #ffb11f; --shred-rotate: 28deg; --shred-scale: 0.88; }
-.cheese-shred-12 { --x: 72%; --y: 53%; --shred-w: 17px; --shred-h: 5px; --shred-color: #ffc52e; --shred-rotate: -31deg; --shred-scale: 0.86; }
-.cheese-shred-13 { --x: 78%; --y: 72%; --shred-w: 12px; --shred-h: 4px; --shred-color: #ffd865; --shred-rotate: 13deg; --shred-scale: 0.78; }
-.cheese-shred-14 { --x: 84%; --y: 44%; --shred-w: 15px; --shred-h: 4px; --shred-color: #f6a817; --shred-rotate: -38deg; --shred-scale: 0.82; }
-.cheese-shred-15 { --x: 90%; --y: 61%; --shred-w: 11px; --shred-h: 4px; --shred-color: #ffe494; --shred-rotate: 20deg; --shred-scale: 0.75; }
-.cheese-shred-16 { --x: 16%; --y: 78%; --shred-w: 13px; --shred-h: 4px; --shred-color: #ffc52e; --shred-rotate: 48deg; --shred-scale: 0.82; }
-.cheese-shred-17 { --x: 32%; --y: 25%; --shred-w: 12px; --shred-h: 4px; --shred-color: #ffb11f; --shred-rotate: 11deg; --shred-scale: 0.72; }
-.cheese-shred-18 { --x: 46%; --y: 52%; --shred-w: 13px; --shred-h: 4px; --shred-color: #ffe494; --shred-rotate: 36deg; --shred-scale: 0.78; }
-.cheese-shred-19 { --x: 58%; --y: 21%; --shred-w: 15px; --shred-h: 5px; --shred-color: #ffd865; --shred-rotate: -34deg; --shred-scale: 0.8; }
-.cheese-shred-20 { --x: 68%; --y: 78%; --shred-w: 14px; --shred-h: 4px; --shred-color: #ffbf26; --shred-rotate: -18deg; --shred-scale: 0.84; }
-.cheese-shred-21 { --x: 82%; --y: 26%; --shred-w: 12px; --shred-h: 4px; --shred-color: #ffe494; --shred-rotate: 43deg; --shred-scale: 0.72; }
-.cheese-shred-22 { --x: 93%; --y: 38%; --shred-w: 13px; --shred-h: 4px; --shred-color: #ffc52e; --shred-rotate: -12deg; --shred-scale: 0.78; }
-.cheese-shred-23 { --x: 9%; --y: 68%; --shred-w: 10px; --shred-h: 4px; --shred-color: #ffe494; --shred-rotate: -42deg; --shred-scale: 0.7; }
-.cheese-shred-24 { --x: 22%; --y: 49%; --shred-w: 14px; --shred-h: 5px; --shred-color: #f6a817; --shred-rotate: 5deg; --shred-scale: 0.84; }
-.cheese-shred-25 { --x: 39%; --y: 84%; --shred-w: 12px; --shred-h: 4px; --shred-color: #ffd865; --shred-rotate: -15deg; --shred-scale: 0.75; }
-.cheese-shred-26 { --x: 52%; --y: 68%; --shred-w: 16px; --shred-h: 4px; --shred-color: #ffb11f; --shred-rotate: 24deg; --shred-scale: 0.84; }
-.cheese-shred-27 { --x: 63%; --y: 47%; --shred-w: 11px; --shred-h: 4px; --shred-color: #ffe494; --shred-rotate: -27deg; --shred-scale: 0.72; }
-.cheese-shred-28 { --x: 74%; --y: 66%; --shred-w: 13px; --shred-h: 4px; --shred-color: #ffd865; --shred-rotate: 37deg; --shred-scale: 0.8; }
-.cheese-shred-29 { --x: 87%; --y: 82%; --shred-w: 15px; --shred-h: 4px; --shred-color: #ffc52e; --shred-rotate: -40deg; --shred-scale: 0.82; }
-.cheese-shred-30 { --x: 95%; --y: 54%; --shred-w: 10px; --shred-h: 4px; --shred-color: #ffe494; --shred-rotate: 18deg; --shred-scale: 0.7; }
-.cheese-shred-31 { --x: 28%; --y: 35%; --shred-w: 12px; --shred-h: 4px; --shred-color: #ffbf26; --shred-rotate: -24deg; --shred-scale: 0.75; }
-.cheese-shred-32 { --x: 35%; --y: 55%; --shred-w: 10px; --shred-h: 4px; --shred-color: #ffe494; --shred-rotate: 18deg; --shred-scale: 0.7; }
-.cheese-shred-33 { --x: 43%; --y: 39%; --shred-w: 14px; --shred-h: 4px; --shred-color: #ffc52e; --shred-rotate: -42deg; --shred-scale: 0.82; }
-.cheese-shred-34 { --x: 50%; --y: 31%; --shred-w: 11px; --shred-h: 4px; --shred-color: #ffd865; --shred-rotate: 15deg; --shred-scale: 0.72; }
-.cheese-shred-35 { --x: 57%; --y: 55%; --shred-w: 13px; --shred-h: 5px; --shred-color: #f6a817; --shred-rotate: 48deg; --shred-scale: 0.8; }
-.cheese-shred-36 { --x: 64%; --y: 26%; --shred-w: 10px; --shred-h: 4px; --shred-color: #ffe494; --shred-rotate: -5deg; --shred-scale: 0.7; }
-.cheese-shred-37 { --x: 71%; --y: 83%; --shred-w: 12px; --shred-h: 4px; --shred-color: #ffd865; --shred-rotate: 29deg; --shred-scale: 0.75; }
-.cheese-shred-38 { --x: 79%; --y: 57%; --shred-w: 15px; --shred-h: 4px; --shred-color: #ffb11f; --shred-rotate: -16deg; --shred-scale: 0.84; }
-.cheese-shred-39 { --x: 86%; --y: 34%; --shred-w: 11px; --shred-h: 4px; --shred-color: #ffe494; --shred-rotate: 39deg; --shred-scale: 0.72; }
-.cheese-shred-40 { --x: 91%; --y: 72%; --shred-w: 14px; --shred-h: 5px; --shred-color: #ffc52e; --shred-rotate: -29deg; --shred-scale: 0.8; }
-.cheese-shred-41 { --x: 18%; --y: 39%; --shred-w: 10px; --shred-h: 4px; --shred-color: #ffe494; --shred-rotate: -7deg; --shred-scale: 0.68; }
-.cheese-shred-42 { --x: 76%; --y: 43%; --shred-w: 12px; --shred-h: 4px; --shred-color: #ffd865; --shred-rotate: 8deg; --shred-scale: 0.72; }
+.spring-onion-piece-1 { --x: 7%; --y: 39%; --onion-w: 7px; --onion-h: 3px; --onion-color: #f7fff0; --onion-rotate: -18deg; --onion-scale: 0.9; }
+.spring-onion-piece-2 { --x: 13%; --y: 58%; --onion-w: 9px; --onion-h: 3px; --onion-color: #75cf4f; --onion-rotate: 16deg; --onion-scale: 0.85; }
+.spring-onion-piece-3 { --x: 19%; --y: 31%; --onion-w: 8px; --onion-h: 3px; --onion-color: #2f9f5e; --onion-rotate: 42deg; --onion-scale: 0.75; }
+.spring-onion-piece-4 { --x: 24%; --y: 70%; --onion-w: 9px; --onion-h: 3px; --onion-color: #b5ea7f; --onion-rotate: -30deg; --onion-scale: 0.9; }
+.spring-onion-piece-5 { --x: 30%; --y: 45%; --onion-w: 6px; --onion-h: 3px; --onion-color: #f9ffe9; --onion-rotate: 8deg; --onion-scale: 0.8; }
+.spring-onion-piece-6 { --x: 36%; --y: 62%; --onion-w: 10px; --onion-h: 3px; --onion-color: #58bd4e; --onion-rotate: 26deg; --onion-scale: 0.82; }
+.spring-onion-piece-7 { --x: 42%; --y: 27%; --onion-w: 7px; --onion-h: 3px; --onion-color: #238f57; --onion-rotate: -28deg; --onion-scale: 0.75; }
+.spring-onion-piece-8 { --x: 48%; --y: 75%; --onion-w: 8px; --onion-h: 3px; --onion-color: #a9e66f; --onion-rotate: 41deg; --onion-scale: 0.86; }
+.spring-onion-piece-9 { --x: 54%; --y: 42%; --onion-w: 9px; --onion-h: 3px; --onion-color: #ecffd9; --onion-rotate: -9deg; --onion-scale: 0.82; }
+.spring-onion-piece-10 { --x: 60%; --y: 64%; --onion-w: 6px; --onion-h: 3px; --onion-color: #2f9f5e; --onion-rotate: -21deg; --onion-scale: 0.75; }
+.spring-onion-piece-11 { --x: 66%; --y: 34%; --onion-w: 9px; --onion-h: 3px; --onion-color: #75cf4f; --onion-rotate: 28deg; --onion-scale: 0.88; }
+.spring-onion-piece-12 { --x: 72%; --y: 53%; --onion-w: 10px; --onion-h: 3px; --onion-color: #f7fff0; --onion-rotate: -31deg; --onion-scale: 0.86; }
+.spring-onion-piece-13 { --x: 78%; --y: 72%; --onion-w: 7px; --onion-h: 3px; --onion-color: #a9e66f; --onion-rotate: 13deg; --onion-scale: 0.78; }
+.spring-onion-piece-14 { --x: 84%; --y: 44%; --onion-w: 9px; --onion-h: 3px; --onion-color: #238f57; --onion-rotate: -38deg; --onion-scale: 0.82; }
+.spring-onion-piece-15 { --x: 90%; --y: 61%; --onion-w: 6px; --onion-h: 3px; --onion-color: #f9ffe9; --onion-rotate: 20deg; --onion-scale: 0.75; }
+.spring-onion-piece-16 { --x: 16%; --y: 78%; --onion-w: 8px; --onion-h: 3px; --onion-color: #b5ea7f; --onion-rotate: 48deg; --onion-scale: 0.82; }
+.spring-onion-piece-17 { --x: 32%; --y: 25%; --onion-w: 7px; --onion-h: 3px; --onion-color: #58bd4e; --onion-rotate: 11deg; --onion-scale: 0.72; }
+.spring-onion-piece-18 { --x: 46%; --y: 52%; --onion-w: 8px; --onion-h: 3px; --onion-color: #ecffd9; --onion-rotate: 36deg; --onion-scale: 0.78; }
+.spring-onion-piece-19 { --x: 58%; --y: 21%; --onion-w: 9px; --onion-h: 3px; --onion-color: #2f9f5e; --onion-rotate: -34deg; --onion-scale: 0.8; }
+.spring-onion-piece-20 { --x: 68%; --y: 78%; --onion-w: 8px; --onion-h: 3px; --onion-color: #a9e66f; --onion-rotate: -18deg; --onion-scale: 0.84; }
+.spring-onion-piece-21 { --x: 82%; --y: 26%; --onion-w: 7px; --onion-h: 3px; --onion-color: #f7fff0; --onion-rotate: 43deg; --onion-scale: 0.72; }
+.spring-onion-piece-22 { --x: 93%; --y: 38%; --onion-w: 8px; --onion-h: 3px; --onion-color: #58bd4e; --onion-rotate: -12deg; --onion-scale: 0.78; }
+.spring-onion-piece-23 { --x: 9%; --y: 68%; --onion-w: 6px; --onion-h: 3px; --onion-color: #2f9f5e; --onion-rotate: -42deg; --onion-scale: 0.7; }
+.spring-onion-piece-24 { --x: 22%; --y: 49%; --onion-w: 8px; --onion-h: 3px; --onion-color: #b5ea7f; --onion-rotate: 5deg; --onion-scale: 0.84; }
+.spring-onion-piece-25 { --x: 39%; --y: 84%; --onion-w: 7px; --onion-h: 3px; --onion-color: #f9ffe9; --onion-rotate: -15deg; --onion-scale: 0.75; }
+.spring-onion-piece-26 { --x: 52%; --y: 68%; --onion-w: 9px; --onion-h: 3px; --onion-color: #75cf4f; --onion-rotate: 24deg; --onion-scale: 0.84; }
+.spring-onion-piece-27 { --x: 63%; --y: 47%; --onion-w: 6px; --onion-h: 3px; --onion-color: #238f57; --onion-rotate: -27deg; --onion-scale: 0.72; }
+.spring-onion-piece-28 { --x: 74%; --y: 66%; --onion-w: 8px; --onion-h: 3px; --onion-color: #ecffd9; --onion-rotate: 37deg; --onion-scale: 0.8; }
+.spring-onion-piece-29 { --x: 87%; --y: 82%; --onion-w: 9px; --onion-h: 3px; --onion-color: #a9e66f; --onion-rotate: -40deg; --onion-scale: 0.82; }
+.spring-onion-piece-30 { --x: 95%; --y: 54%; --onion-w: 6px; --onion-h: 3px; --onion-color: #f7fff0; --onion-rotate: 18deg; --onion-scale: 0.7; }
+.spring-onion-piece-31 { --x: 28%; --y: 35%; --onion-w: 7px; --onion-h: 3px; --onion-color: #58bd4e; --onion-rotate: -24deg; --onion-scale: 0.75; }
+.spring-onion-piece-32 { --x: 35%; --y: 55%; --onion-w: 6px; --onion-h: 3px; --onion-color: #f9ffe9; --onion-rotate: 18deg; --onion-scale: 0.7; }
+.spring-onion-piece-33 { --x: 43%; --y: 39%; --onion-w: 8px; --onion-h: 3px; --onion-color: #75cf4f; --onion-rotate: -42deg; --onion-scale: 0.82; }
+.spring-onion-piece-34 { --x: 50%; --y: 31%; --onion-w: 6px; --onion-h: 3px; --onion-color: #ecffd9; --onion-rotate: 15deg; --onion-scale: 0.72; }
+.spring-onion-piece-35 { --x: 57%; --y: 55%; --onion-w: 8px; --onion-h: 3px; --onion-color: #2f9f5e; --onion-rotate: 48deg; --onion-scale: 0.8; }
+.spring-onion-piece-36 { --x: 64%; --y: 26%; --onion-w: 6px; --onion-h: 3px; --onion-color: #f7fff0; --onion-rotate: -5deg; --onion-scale: 0.7; }
+.spring-onion-piece-37 { --x: 71%; --y: 83%; --onion-w: 7px; --onion-h: 3px; --onion-color: #a9e66f; --onion-rotate: 29deg; --onion-scale: 0.75; }
+.spring-onion-piece-38 { --x: 79%; --y: 57%; --onion-w: 9px; --onion-h: 3px; --onion-color: #58bd4e; --onion-rotate: -16deg; --onion-scale: 0.84; }
+.spring-onion-piece-39 { --x: 86%; --y: 34%; --onion-w: 6px; --onion-h: 3px; --onion-color: #ecffd9; --onion-rotate: 39deg; --onion-scale: 0.72; }
+.spring-onion-piece-40 { --x: 91%; --y: 72%; --onion-w: 8px; --onion-h: 3px; --onion-color: #238f57; --onion-rotate: -29deg; --onion-scale: 0.8; }
+.spring-onion-piece-41 { --x: 18%; --y: 39%; --onion-w: 6px; --onion-h: 3px; --onion-color: #f9ffe9; --onion-rotate: -7deg; --onion-scale: 0.68; }
+.spring-onion-piece-42 { --x: 76%; --y: 43%; --onion-w: 7px; --onion-h: 3px; --onion-color: #a9e66f; --onion-rotate: 8deg; --onion-scale: 0.72; }
 
-.pot-ingredient-chip.entering[data-food="cheese"] .cheese-shred {
-  animation: cheese-sprinkle 400ms ease-out both;
+.pot-ingredient-chip.entering[data-food="spring-onion"] .spring-onion-piece {
+  animation: spring-onion-sprinkle 400ms ease-out both;
 }
 
-.pot-wrap.stirring .cheese-shred {
-  animation: cheese-stir 820ms ease-in-out both;
+.pot-wrap.stirring .spring-onion-piece {
+  animation: spring-onion-stir 820ms ease-in-out both;
 }
 
 .pot-ingredient-chip[data-food="spicy-peppers"] {
@@ -1711,12 +1711,12 @@ h2 {
 }
 
 
-.ingredient-card[data-food="cheese"] .food-mark span {
+.ingredient-card[data-food="spring-onion"] .food-mark span {
   left: -1px;
   top: 3px;
   width: 48px;
   height: 42px;
-  background: url("assets/melty-cheese.png") center / contain no-repeat;
+  background: url("assets/spring-onion.png") center / contain no-repeat;
   box-shadow: none;
   transform: none;
 }
@@ -2019,7 +2019,7 @@ footer {
   }
 
   .ingredient-card[data-food="tofu"] .food-mark span,
-  .ingredient-card[data-food="cheese"] .food-mark span,
+  .ingredient-card[data-food="spring-onion"] .food-mark span,
   .ingredient-card[data-food="spicy-peppers"] .food-mark span {
     transform: scale(0.9);
   }
@@ -2475,14 +2475,14 @@ footer {
   }
 }
 
-@keyframes cheese-sprinkle {
+@keyframes spring-onion-sprinkle {
   0% {
     opacity: 0;
-    transform: translate(-50%, calc(-50% - 12px)) rotate(var(--shred-rotate, 0deg)) scale(calc(var(--shred-scale, 1) * 0.82));
+    transform: translate(-50%, calc(-50% - 12px)) rotate(var(--onion-rotate, 0deg)) scale(calc(var(--onion-scale, 1) * 0.82));
   }
   100% {
     opacity: 1;
-    transform: translate(-50%, -50%) rotate(var(--shred-rotate, 0deg)) scale(var(--shred-scale, 1));
+    transform: translate(-50%, -50%) rotate(var(--onion-rotate, 0deg)) scale(var(--onion-scale, 1));
   }
 }
 
@@ -2499,16 +2499,16 @@ footer {
   }
 }
 
-@keyframes cheese-stir {
+@keyframes spring-onion-stir {
   0%,
   100% {
-    transform: translate(-50%, -50%) rotate(var(--shred-rotate, 0deg)) scale(var(--shred-scale, 1));
+    transform: translate(-50%, -50%) rotate(var(--onion-rotate, 0deg)) scale(var(--onion-scale, 1));
   }
   36% {
-    transform: translate(calc(-50% + 2px), calc(-50% + 1px)) rotate(calc(var(--shred-rotate, 0deg) + 8deg)) scale(var(--shred-scale, 1));
+    transform: translate(calc(-50% + 2px), calc(-50% + 1px)) rotate(calc(var(--onion-rotate, 0deg) + 8deg)) scale(var(--onion-scale, 1));
   }
   68% {
-    transform: translate(calc(-50% - 2px), calc(-50% + 2px)) rotate(calc(var(--shred-rotate, 0deg) - 7deg)) scale(var(--shred-scale, 1));
+    transform: translate(calc(-50% - 2px), calc(-50% + 2px)) rotate(calc(var(--onion-rotate, 0deg) - 7deg)) scale(var(--onion-scale, 1));
   }
 }
 
@@ -2972,7 +2972,7 @@ footer {
 
   .ingredient-card[data-food="steak-bite"] .food-mark span,
   .ingredient-card[data-food="seafood-bite"] .food-mark span,
-  .ingredient-card[data-food="cheese"] .food-mark span {
+  .ingredient-card[data-food="spring-onion"] .food-mark span {
     transform: translate(calc(-50% + 12px), calc(-50% + 4px));
   }
 
