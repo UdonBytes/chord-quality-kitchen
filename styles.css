@@ -1894,6 +1894,7 @@ footer {
 
   .recipe-board-toggle {
     margin-bottom: 4px;
+    font-size: 0.77rem;
   }
 
   .recipe-board-list {
@@ -1905,9 +1906,13 @@ footer {
     padding: 6px 7px;
   }
 
+  .recipe-board-item strong {
+    font-size: 0.74rem;
+  }
+
   .recipe-ingredient {
     padding: 1px 4px;
-    font-size: 0.52rem;
+    font-size: 0.58rem;
   }
 
   .kitchen-stage {
